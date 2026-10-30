@@ -11,10 +11,52 @@
   <!-- CSS Customizado -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col transition-all duration-200">
+
+  <!-- BARRA DE ACESSIBILIDADE FIXA -->
+  <aside aria-label="Ferramentas de Acessibilidade" class="bg-slate-950 border-b border-slate-800 text-slate-300 py-2 px-4 sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-xs">
+      
+      <!-- Ajuste de Fonte e Contraste -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-semibold text-slate-400 flex items-center gap-1">
+          <i class="fa-solid fa-universal-access text-cyan-400"></i> Acessibilidade:
+        </span>
+        <button onclick="changeFontSize(1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Aumentar Fonte">
+          <i class="fa-solid fa-font"></i> A+
+        </button>
+        <button onclick="changeFontSize(-1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Diminuir Fonte">
+          <i class="fa-solid fa-font"></i> A-
+        </button>
+        <button onclick="resetFontSize()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Tamanho Padrão">
+          A (Normal)
+        </button>
+        <button onclick="toggleHighContrast()" id="btn-contrast" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 rounded border border-amber-500/40 font-medium flex items-center gap-1">
+          <i class="fa-solid fa-circle-half-stroke"></i> Alto Contraste
+        </button>
+      </div>
+
+      <!-- Leitor de Tela (Voz) -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="font-semibold text-slate-400 flex items-center gap-1">
+          <i class="fa-solid fa-volume-high text-indigo-400"></i> Leitor de Voz:
+        </span>
+        <button onclick="readActiveTabContent()" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-medium flex items-center gap-1">
+          <i class="fa-solid fa-play"></i> Ler Conteúdo
+        </button>
+        <button onclick="pauseSpeech()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Pausar / Retomar Voz">
+          <i class="fa-solid fa-pause"></i> Pausar
+        </button>
+        <button onclick="stopSpeech()" class="px-2 py-1 bg-red-900/50 hover:bg-red-800/50 text-red-300 rounded border border-red-700" title="Parar Leitura">
+          <i class="fa-solid fa-stop"></i> Parar
+        </button>
+      </div>
+
+    </div>
+  </aside>
 
   <!-- Header -->
-  <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700 sticky top-0 z-50 shadow-lg">
+  <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="flex items-center gap-3">
         <div class="bg-gradient-to-tr from-cyan-500 to-indigo-500 p-2.5 rounded-xl shadow-md text-white">
@@ -160,21 +202,21 @@
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-            <h4 class="font-bold text-cyan-400 mb-1"><i class="fa-solid fa-universal-access"></i> Acessibilidade</h4>
+            <h3 class="font-bold text-cyan-400 mb-1 flex items-center gap-1.5"><i class="fa-solid fa-universal-access"></i> Acessibilidade</h3>
             <p class="text-xs text-slate-300">Garantia de que qualquer pessoa, independentemente de suas limitações físicas ou sensoriais, possa acessar espaços e informações.</p>
           </div>
           <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-            <h4 class="font-bold text-indigo-400 mb-1"><i class="fa-solid fa-comments"></i> Comunicação</h4>
+            <h3 class="font-bold text-indigo-400 mb-1 flex items-center gap-1.5"><i class="fa-solid fa-comments"></i> Comunicação</h3>
             <p class="text-xs text-slate-300">Troca eficaz de dados e sentimentos através de sinais visuais, sonoros ou textuais adaptados.</p>
           </div>
           <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-            <h4 class="font-bold text-emerald-400 mb-1"><i class="fa-solid fa-heart"></i> Qualidade de Vida</h4>
+            <h3 class="font-bold text-emerald-400 mb-1 flex items-center gap-1.5"><i class="fa-solid fa-heart"></i> Qualidade de Vida</h3>
             <p class="text-xs text-slate-300">Condições que promovem o bem-estar, reduzindo o estresse e favorecendo a autonomia individual.</p>
           </div>
         </div>
 
         <div class="p-4 bg-slate-900/80 rounded-xl border-l-4 border-cyan-500 space-y-2">
-          <h4 class="font-semibold text-slate-200">Cenário Real de Barreira:</h4>
+          <h3 class="font-semibold text-slate-200">Cenário Real de Barreira:</h3>
           <p class="text-sm text-slate-300">
             Uma pessoa com deficiência auditiva em uma estação de trem movimentada não consegue ouvir os avisos sonoros de alteração de plataforma, perdendo o transporte por falta de sinalização visual em tempo real.
           </p>
@@ -206,7 +248,7 @@
           <div class="space-y-4 text-sm text-slate-300">
             <p><strong>Como Funciona:</strong> A matriz acende LEDs individuais em linhas e colunas para formar desenhos e mensagens universais rapidamente compreensíveis.</p>
             <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-700">
-              <h4 class="font-semibold text-cyan-400 text-xs mb-1">Código Gerado (C++ Arduino):</h4>
+              <h3 class="font-semibold text-cyan-400 text-xs mb-1">Código Gerado (C++ Arduino):</h3>
               <pre id="led-matrix-code" class="text-[10px] font-mono text-emerald-400 overflow-x-auto p-2 bg-slate-950 rounded">B00000000, ...</pre>
             </div>
             <ul class="list-disc pl-5 space-y-1 text-xs">
@@ -227,7 +269,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-slate-950 p-6 rounded-xl border border-slate-700 space-y-4">
             <div>
-              <label class="text-xs text-slate-400">Digite uma palavra para transmitir:</label>
+              <label for="morse-input" class="text-xs text-slate-400">Digite uma palavra para transmitir:</label>
               <div class="flex gap-2 mt-1">
                 <input type="text" id="morse-input" value="SOS" class="bg-slate-900 border border-slate-700 rounded px-3 py-1.5 text-sm w-full uppercase font-mono text-cyan-400">
                 <button onclick="playMorseCode()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-1.5 rounded text-xs font-bold transition flex items-center gap-1">
@@ -252,7 +294,7 @@
           </div>
 
           <div class="space-y-3 text-sm text-slate-300">
-            <h4 class="font-semibold text-cyan-400">Acessibilidade e Aplicação:</h4>
+            <h3 class="font-semibold text-cyan-400">Acessibilidade e Aplicação:</h3>
             <p class="text-xs leading-relaxed">
               O Código Morse traduz texto em pulsos curtos (.) e longos (-). É ideal para situações de emergência onde a comunicação verbal é impossível ou onde apenas um botão de acionamento simplificado está disponível.
             </p>
@@ -290,7 +332,7 @@
           </div>
 
           <div class="space-y-3 text-sm text-slate-300">
-            <h4 class="font-semibold text-emerald-400">Aplicação em Acessibilidade:</h4>
+            <h3 class="font-semibold text-emerald-400">Aplicação em Acessibilidade:</h3>
             <p class="text-xs leading-relaxed">
               Displays LCD fornecem orientações textuais diretas para senhas de atendimento, nomes de paradas de ônibus e alertas de emergência, sendo fundamentais para pessoas surdas ou com deficiência auditiva.
             </p>
@@ -426,7 +468,7 @@
         <!-- Área de Upload e Preview de Imagem -->
         <div class="bg-slate-900/60 p-6 rounded-xl border-2 border-dashed border-slate-700 flex flex-col items-center justify-center space-y-4">
           <div id="image-placeholder-zone" class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
-            <img id="preview-user-img" src="" class="hidden absolute inset-0 w-full h-full object-cover">
+            <img id="preview-user-img" src="" alt="Pré-visualização da Imagem" class="hidden absolute inset-0 w-full h-full object-cover">
             <div id="placeholder-text-group" class="space-y-2">
               <i class="fa-solid fa-image text-4xl text-slate-600"></i>
               <p class="text-xs text-slate-400 font-semibold">[ Sua foto / imagem aqui ]</p>
@@ -448,13 +490,13 @@
         <!-- Blocos de Texto Placeholder -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-700/60 space-y-2">
-            <h4 class="font-semibold text-cyan-400 text-sm">[ Insira o Título da Seção 1 ]</h4>
+            <h3 class="font-semibold text-cyan-400 text-sm">[ Insira o Título da Seção 1 ]</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               [ Insira o texto da professora aqui. Este espaço já está formatado com as cores e o estilo das outras abas para manter o padrão do site. ]
             </p>
           </div>
           <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-700/60 space-y-2">
-            <h4 class="font-semibold text-indigo-400 text-sm">[ Insira o Título da Seção 2 ]</h4>
+            <h3 class="font-semibold text-indigo-400 text-sm">[ Insira o Título da Seção 2 ]</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
               [ Insira o texto da professora aqui. Você poderá adicionar tópicos, listas de verificação ou orientações assim que forem divulgados. ]
             </p>
