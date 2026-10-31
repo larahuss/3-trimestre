@@ -13,12 +13,10 @@ let aiLogs = [
 ];
 
 let ledState = Array(64).fill(false);
-let currentFontSize = 100; // Porcentagem do tamanho da fonte
+let currentFontSize = 100;
 let synth = window.speechSynthesis;
 
 // FERRAMENTAS DE ACESSIBILIDADE
-
-// 1. Alterar Tamanho da Fonte
 function changeFontSize(delta) {
   currentFontSize += delta * 10;
   if (currentFontSize < 80) currentFontSize = 80;
@@ -31,7 +29,6 @@ function resetFontSize() {
   document.documentElement.style.fontSize = '100%';
 }
 
-// 2. Modo Alto Contraste
 function toggleHighContrast() {
   document.body.classList.toggle('high-contrast');
   const btn = document.getElementById('btn-contrast');
@@ -42,19 +39,16 @@ function toggleHighContrast() {
   }
 }
 
-// 3. Leitor de Tela (Sintetizador de Voz)
 function readActiveTabContent() {
   if (!synth) {
     alert('Desculpe, seu navegador não suporta leitura por voz.');
     return;
   }
-
-  synth.cancel(); // Para qualquer leitura em andamento
+  synth.cancel();
 
   const activeTab = document.querySelector('.tab-content.active');
   if (!activeTab) return;
 
-  // Extrai o texto visível da aba ativa
   const textToRead = activeTab.innerText;
   const utterance = new SpeechSynthesisUtterance(textToRead);
   utterance.lang = 'pt-BR';
@@ -76,10 +70,9 @@ function stopSpeech() {
   if (synth) synth.cancel();
 }
 
-
 // TROCA DE ABAS
 function switchTab(tabId) {
-  stopSpeech(); // Para o leitor ao trocar de aba
+  stopSpeech();
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
@@ -119,7 +112,6 @@ function initSoundSimulator() {
     }
     path.setAttribute('d', d);
 
-    // Diagnóstico
     const soundClass = document.getElementById('sound-class');
     const soundImpact = document.getElementById('sound-impact');
     if (amp < 55) {
@@ -359,7 +351,7 @@ function deleteAiLogRow(id) {
   renderAiLogs();
 }
 
-// GERENCIADOR DE UPLOAD DE FOTOS (ESPECÍFICO DE CADA ABA)
+// GERENCIADOR DE UPLOAD DE FOTOS (CADA ABA)
 function handleSpecificImageUpload(event, key) {
   const file = event.target.files[0];
   if (file) {
@@ -395,7 +387,7 @@ function removeSpecificImage(key) {
   if (input) input.value = '';
 }
 
-// GERENCIADOR DE UPLOAD DA ABA ADICIONAL
+// UPLOAD DA ABA ADICIONAL
 function handleImageUpload(event) {
   const file = event.target.files[0];
   if (file) {
@@ -427,7 +419,7 @@ function removeUserImage() {
   input.value = '';
 }
 
-// INICIALIZAÇÃO GERAL
+// INICIALIZAÇÃO GERAL AO CARREGAR A PÁGINA
 window.onload = function() {
   initSoundSimulator();
   renderSchoolMeasurements();
