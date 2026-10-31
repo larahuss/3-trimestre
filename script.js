@@ -13,9 +13,58 @@ let aiLogs = [
 ];
 
 let ledState = Array(64).fill(false);
+let currentFontSize = 100;
+let synth = window.speechSynthesis;
+
+// FUNÇÕES DE ACESSIBILIDADE (ADICIONADAS)
+function changeFontSize(delta) {
+  currentFontSize += delta * 10;
+  if (currentFontSize < 80) currentFontSize = 80;
+  if (currentFontSize > 150) currentFontSize = 150;
+  document.documentElement.style.fontSize = `${currentFontSize}%`;
+}
+
+function resetFontSize() {
+  currentFontSize = 100;
+  document.documentElement.style.fontSize = '100%';
+}
+
+function toggleHighContrast() {
+  document.body.classList.toggle('high-contrast');
+}
+
+function readActiveTabContent() {
+  if (!synth) return;
+  synth.cancel();
+  const activeTab = document.querySelector('.tab-content.active');
+  if (!activeTab) return;
+  const utterance = new SpeechSynthesisUtterance(activeTab.innerText);
+  utterance.lang = 'pt-BR';
+  synth.speak(utterance);
+}
+
+function pauseSpeech() {
+  if (!synth) return;
+  if (synth.speaking && !synth.paused) synth.pause();
+  else if (synth.paused) synth.resume();
+}
+
+function stopSpeech() {
+  if (synth) synth.cancel();
+}
+
+// ATUALIZAR LINK DA FOTO (ADICIONADA)
+function updatePhotoUrl(type) {
+  const input = document.getElementById(`link-${type}`);
+  const img = document.getElementById(`img-${type}`);
+  if (input && img && input.value.trim() !== '') {
+    img.src = input.value.trim();
+  }
+}
 
 // TROCA DE ABAS
 function switchTab(tabId) {
+  stopSpeech();
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
@@ -335,5 +384,3 @@ window.onload = function() {
   updateLcdDisplay();
   renderAiLogs();
 };
-
-```
