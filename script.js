@@ -359,7 +359,43 @@ function deleteAiLogRow(id) {
   renderAiLogs();
 }
 
-// GERENCIADOR DE UPLOAD DE FOTO (MÓDULO ADICIONAL)
+// GERENCIADOR DE UPLOAD DE FOTOS (ESPECÍFICO DE CADA ABA)
+function handleSpecificImageUpload(event, key) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = document.getElementById(`preview-${key}-img`);
+      const textGroup = document.getElementById(`text-group-${key}`);
+      const removeBtn = document.getElementById(`btn-remove-${key}`);
+
+      if (img && textGroup && removeBtn) {
+        img.src = e.target.result;
+        img.classList.remove('hidden');
+        textGroup.classList.add('hidden');
+        removeBtn.classList.remove('hidden');
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function removeSpecificImage(key) {
+  const img = document.getElementById(`preview-${key}-img`);
+  const textGroup = document.getElementById(`text-group-${key}`);
+  const removeBtn = document.getElementById(`btn-remove-${key}`);
+  const input = document.getElementById(`input-${key}-photo`);
+
+  if (img && textGroup && removeBtn) {
+    img.src = '';
+    img.classList.add('hidden');
+    textGroup.classList.remove('hidden');
+    removeBtn.classList.add('hidden');
+  }
+  if (input) input.value = '';
+}
+
+// GERENCIADOR DE UPLOAD DA ABA ADICIONAL
 function handleImageUpload(event) {
   const file = event.target.files[0];
   if (file) {

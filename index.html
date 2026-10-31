@@ -66,7 +66,7 @@
           <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
             Projeto Integrador: Tecnologia & Acessibilidade
           </h1>
-          <p class="text-xs text-slate-400">Física e Tecnociência e Robótica — 2ºC & 3º Trimestre</p>
+          <p class="text-xs text-slate-400">Física, Tecnociência e Robótica — 2ºC & 3º Trimestre</p>
         </div>
       </div>
 
@@ -110,19 +110,12 @@
     <section id="tab-fisica" class="tab-content active space-y-6">
       <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl">
         <div class="flex items-center gap-3 mb-4">
-          <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Projeto de Física e Tecnociência</span>
+          <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Projeto de Física</span>
           <h2 class="text-2xl font-bold">Ciência do Som: Audição, Acessibilidade e Qualidade de Vida</h2>
         </div>
         <p class="text-slate-300 leading-relaxed">
-          O som é uma vibração que se espalha em ondas pelo ar, água ou sólidos. Como precisa de matéria para se mover, o som não se propaga no vácuo.
-
-          Frequência (Hz): Velocidade da vibração. Define se o som é grave (vibração lenta, som grosso) ou agudo (vibração rápida, som fino).
-
-
-           Intensidade Sonora: Energia da onda. Define se o som é fraco (pouca energia, baixinho) ou forte (muita energia, alto).
-
-
-          Nível Sonoro (dB): Medida do volume em decibéis. A cada 10 dB somados, a energia do som fica 10 vezes maior.
+          Este módulo investiga os fundamentos da acústica, a medição do nível sonoro na escola e como o ruído afeta a saúde, a concentração e a inclusão de pessoas com hipersensibilidade auditiva.
+        </p>
       </div>
 
       <!-- Simulador de Onda Sonora -->
@@ -264,6 +257,35 @@
             </ul>
           </div>
         </div>
+
+        <!-- ÁREA PARA ADICIONAR FOTO DO PROJETO DE MATRIZ DE LEDS -->
+        <div class="mt-6 pt-6 border-t border-slate-700/60 bg-slate-900/60 p-5 rounded-xl border border-slate-700">
+          <h3 class="font-semibold text-cyan-400 text-sm mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-camera"></i> Foto do Projeto de Matriz de LEDs (Tinkercad / Protótipo)
+          </h3>
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <div id="matriz-placeholder-zone" class="w-full md:w-64 h-40 bg-slate-950 rounded-lg border-2 border-dashed border-slate-700 flex flex-col items-center justify-center p-3 text-center relative overflow-hidden">
+              <img id="preview-matriz-img" src="" alt="Foto Matriz de LEDs" class="hidden absolute inset-0 w-full h-full object-cover">
+              <div id="text-group-matriz" class="space-y-1">
+                <i class="fa-solid fa-image text-3xl text-slate-600"></i>
+                <p class="text-xs text-slate-400 font-semibold">[ Sua foto da Matriz aqui ]</p>
+              </div>
+            </div>
+            <div class="space-y-2 flex-grow">
+              <p class="text-xs text-slate-400">Carregue aqui a captura de tela do Tinkercad ou a foto da sua montagem física da Matriz de LEDs.</p>
+              <div class="flex items-center gap-3 pt-1">
+                <input type="file" id="input-matriz-photo" accept="image/*" class="hidden" onchange="handleSpecificImageUpload(event, 'matriz')">
+                <button onclick="document.getElementById('input-matriz-photo').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3.5 py-2 rounded-lg font-medium transition flex items-center gap-1.5">
+                  <i class="fa-solid fa-upload"></i> Selecionar Imagem
+                </button>
+                <button onclick="removeSpecificImage('matriz')" id="btn-remove-matriz" class="hidden bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs px-3 py-2 rounded-lg transition">
+                  Remover Foto
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -311,6 +333,35 @@
             </div>
           </div>
         </div>
+
+        <!-- ÁREA PARA ADICIONAR FOTO DO PROJETO DE CÓDIGO MORSE -->
+        <div class="mt-6 pt-6 border-t border-slate-700/60 bg-slate-900/60 p-5 rounded-xl border border-slate-700">
+          <h3 class="font-semibold text-amber-400 text-sm mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-camera"></i> Foto do Circuito de Código Morse (Buzzer / LED / Botão)
+          </h3>
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <div id="morse-placeholder-zone" class="w-full md:w-64 h-40 bg-slate-950 rounded-lg border-2 border-dashed border-slate-700 flex flex-col items-center justify-center p-3 text-center relative overflow-hidden">
+              <img id="preview-morse-img" src="" alt="Foto Código Morse" class="hidden absolute inset-0 w-full h-full object-cover">
+              <div id="text-group-morse" class="space-y-1">
+                <i class="fa-solid fa-image text-3xl text-slate-600"></i>
+                <p class="text-xs text-slate-400 font-semibold">[ Sua foto do Circuito Morse aqui ]</p>
+              </div>
+            </div>
+            <div class="space-y-2 flex-grow">
+              <p class="text-xs text-slate-400">Insira a imagem ou captura do seu circuito emissor em Morse no Tinkercad.</p>
+              <div class="flex items-center gap-3 pt-1">
+                <input type="file" id="input-morse-photo" accept="image/*" class="hidden" onchange="handleSpecificImageUpload(event, 'morse')">
+                <button onclick="document.getElementById('input-morse-photo').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3.5 py-2 rounded-lg font-medium transition flex items-center gap-1.5">
+                  <i class="fa-solid fa-upload"></i> Selecionar Imagem
+                </button>
+                <button onclick="removeSpecificImage('morse')" id="btn-remove-morse" class="hidden bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs px-3 py-2 rounded-lg transition">
+                  Remover Foto
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -349,6 +400,35 @@
             </ul>
           </div>
         </div>
+
+        <!-- ÁREA PARA ADICIONAR FOTO DO PROJETO DE DISPLAY LCD -->
+        <div class="mt-6 pt-6 border-t border-slate-700/60 bg-slate-900/60 p-5 rounded-xl border border-slate-700">
+          <h3 class="font-semibold text-emerald-400 text-sm mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-camera"></i> Foto do Projeto de Display LCD 16x2
+          </h3>
+          <div class="flex flex-col md:flex-row items-center gap-4">
+            <div id="display-placeholder-zone" class="w-full md:w-64 h-40 bg-slate-950 rounded-lg border-2 border-dashed border-slate-700 flex flex-col items-center justify-center p-3 text-center relative overflow-hidden">
+              <img id="preview-display-img" src="" alt="Foto Display LCD" class="hidden absolute inset-0 w-full h-full object-cover">
+              <div id="text-group-display" class="space-y-1">
+                <i class="fa-solid fa-image text-3xl text-slate-600"></i>
+                <p class="text-xs text-slate-400 font-semibold">[ Sua foto do Display LCD aqui ]</p>
+              </div>
+            </div>
+            <div class="space-y-2 flex-grow">
+              <p class="text-xs text-slate-400">Adicione a imagem da tela do Display funcionando no seu projeto de robótica.</p>
+              <div class="flex items-center gap-3 pt-1">
+                <input type="file" id="input-display-photo" accept="image/*" class="hidden" onchange="handleSpecificImageUpload(event, 'display')">
+                <button onclick="document.getElementById('input-display-photo').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3.5 py-2 rounded-lg font-medium transition flex items-center gap-1.5">
+                  <i class="fa-solid fa-upload"></i> Selecionar Imagem
+                </button>
+                <button onclick="removeSpecificImage('display')" id="btn-remove-display" class="hidden bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs px-3 py-2 rounded-lg transition">
+                  Remover Foto
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
