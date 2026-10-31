@@ -13,35 +13,8 @@
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
-  <!-- BARRA DE ACESSIBILIDADE ADICIONADA -->
-  <aside aria-label="Acessibilidade" class="bg-slate-950 border-b border-slate-800 text-slate-300 py-2 px-4 sticky top-0 z-50 shadow-md">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-xs">
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="font-semibold text-slate-400 flex items-center gap-1">
-          <i class="fa-solid fa-universal-access text-cyan-400"></i> Acessibilidade:
-        </span>
-        <button onclick="changeFontSize(1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Aumentar Fonte">A+</button>
-        <button onclick="changeFontSize(-1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Diminuir Fonte">A-</button>
-        <button onclick="resetFontSize()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Tamanho Padrão">A (Normal)</button>
-        <button onclick="toggleHighContrast()" id="btn-contrast" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 rounded border border-amber-500/40">
-          <i class="fa-solid fa-circle-half-stroke"></i> Alto Contraste
-        </button>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="font-semibold text-slate-400 flex items-center gap-1">
-          <i class="fa-solid fa-volume-high text-indigo-400"></i> Leitor de Voz:
-        </span>
-        <button onclick="readActiveTabContent()" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-medium">
-          <i class="fa-solid fa-play"></i> Ler Conteúdo
-        </button>
-        <button onclick="pauseSpeech()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700">Pausar</button>
-        <button onclick="stopSpeech()" class="px-2 py-1 bg-red-900/50 hover:bg-red-800/50 text-red-300 rounded border border-red-700">Parar</button>
-      </div>
-    </div>
-  </aside>
-
   <!-- Header -->
-  <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700 sticky top-0 z-40 shadow-lg">
+  <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700 sticky top-0 z-50 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="flex items-center gap-3">
         <div class="bg-gradient-to-tr from-cyan-500 to-indigo-500 p-2.5 rounded-xl shadow-md text-white">
@@ -242,15 +215,6 @@
             </ul>
           </div>
         </div>
-
-        <!-- FOTO DO PROJETO MATRIZ ADICIONADA -->
-        <div class="mt-4 p-4 bg-slate-900/60 rounded-xl border border-slate-700 space-y-3">
-          <h4 class="font-bold text-cyan-400 text-sm"><i class="fa-solid fa-camera"></i> Foto do Projeto (Matriz de LEDs)</h4>
-          <input type="text" id="link-matriz" placeholder="Cole o link da sua foto aqui..." oninput="updatePhotoUrl('matriz')" class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200">
-          <div class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center">
-            <img id="img-matriz" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop" alt="Foto Matriz de LEDs" class="w-full h-full object-cover">
-          </div>
-        </div>
       </div>
     </section>
 
@@ -298,15 +262,6 @@
             </div>
           </div>
         </div>
-
-        <!-- FOTO DO PROJETO MORSE ADICIONADA -->
-        <div class="mt-4 p-4 bg-slate-900/60 rounded-xl border border-slate-700 space-y-3">
-          <h4 class="font-bold text-cyan-400 text-sm"><i class="fa-solid fa-camera"></i> Foto do Projeto (Código Morse)</h4>
-          <input type="text" id="link-morse" placeholder="Cole o link da sua foto aqui..." oninput="updatePhotoUrl('morse')" class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200">
-          <div class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center">
-            <img id="img-morse" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&auto=format&fit=crop" alt="Foto Código Morse" class="w-full h-full object-cover">
-          </div>
-        </div>
       </div>
     </section>
 
@@ -343,15 +298,6 @@
               <li><strong>Vantagem:</strong> Transmite frases claras e detalhadas.</li>
               <li><strong>Limitação:</strong> Requer alfabetização e boa acuidade visual.</li>
             </ul>
-          </div>
-        </div>
-
-        <!-- FOTO DO PROJETO LCD ADICIONADA -->
-        <div class="mt-4 p-4 bg-slate-900/60 rounded-xl border border-slate-700 space-y-3">
-          <h4 class="font-bold text-cyan-400 text-sm"><i class="fa-solid fa-camera"></i> Foto do Projeto (Display LCD)</h4>
-          <input type="text" id="link-lcd" placeholder="Cole o link da sua foto aqui..." oninput="updatePhotoUrl('lcd')" class="w-full bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200">
-          <div class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center">
-            <img id="img-lcd" src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=500&auto=format&fit=crop" alt="Foto Display LCD" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
