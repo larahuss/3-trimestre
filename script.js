@@ -13,66 +13,9 @@ let aiLogs = [
 ];
 
 let ledState = Array(64).fill(false);
-let currentFontSize = 100;
-let synth = window.speechSynthesis;
-
-// FERRAMENTAS DE ACESSIBILIDADE
-function changeFontSize(delta) {
-  currentFontSize += delta * 10;
-  if (currentFontSize < 80) currentFontSize = 80;
-  if (currentFontSize > 150) currentFontSize = 150;
-  document.documentElement.style.fontSize = `${currentFontSize}%`;
-}
-
-function resetFontSize() {
-  currentFontSize = 100;
-  document.documentElement.style.fontSize = '100%';
-}
-
-function toggleHighContrast() {
-  document.body.classList.toggle('high-contrast');
-  const btn = document.getElementById('btn-contrast');
-  if (document.body.classList.contains('high-contrast')) {
-    btn.classList.add('bg-amber-400', 'text-black');
-  } else {
-    btn.classList.remove('bg-amber-400', 'text-black');
-  }
-}
-
-function readActiveTabContent() {
-  if (!synth) {
-    alert('Desculpe, seu navegador não suporta leitura por voz.');
-    return;
-  }
-  synth.cancel();
-
-  const activeTab = document.querySelector('.tab-content.active');
-  if (!activeTab) return;
-
-  const textToRead = activeTab.innerText;
-  const utterance = new SpeechSynthesisUtterance(textToRead);
-  utterance.lang = 'pt-BR';
-  utterance.rate = 1.0;
-
-  synth.speak(utterance);
-}
-
-function pauseSpeech() {
-  if (!synth) return;
-  if (synth.speaking && !synth.paused) {
-    synth.pause();
-  } else if (synth.paused) {
-    synth.resume();
-  }
-}
-
-function stopSpeech() {
-  if (synth) synth.cancel();
-}
 
 // TROCA DE ABAS
 function switchTab(tabId) {
-  stopSpeech();
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
@@ -112,6 +55,7 @@ function initSoundSimulator() {
     }
     path.setAttribute('d', d);
 
+    // Diagnóstico
     const soundClass = document.getElementById('sound-class');
     const soundImpact = document.getElementById('sound-impact');
     if (amp < 55) {
@@ -159,7 +103,7 @@ function renderSchoolMeasurements() {
       <td class="p-3 font-bold ${item.db >= 80 ? 'text-red-400' : 'text-cyan-400'}">${item.db} dB</td>
       <td class="p-3 text-slate-300">${item.contexto}</td>
       <td class="p-3">
-        <button onclick="deleteSchoolMeasurementRow(${item.id})" class="text-red-400 hover:text-red-300 text-xs" title="Excluir medição">
+        <button onclick="deleteSchoolMeasurementRow(${item.id})" class="text-red-400 hover:text-red-300 text-xs">
           <i class="fa-solid fa-trash"></i>
         </button>
       </td>
@@ -320,7 +264,7 @@ function renderAiLogs() {
       <td class="p-3 text-slate-400 text-xs">${item.verificacao}</td>
       <td class="p-3 text-emerald-400 text-xs">${item.alteracao}</td>
       <td class="p-3">
-        <button onclick="deleteAiLogRow(${item.id})" class="text-red-400 hover:text-red-300 text-xs" title="Excluir log">
+        <button onclick="deleteAiLogRow(${item.id})" class="text-red-400 hover:text-red-300 text-xs">
           <i class="fa-solid fa-trash"></i>
         </button>
       </td>
@@ -351,43 +295,7 @@ function deleteAiLogRow(id) {
   renderAiLogs();
 }
 
-// GERENCIADOR DE UPLOAD DE FOTOS (CADA ABA)
-function handleSpecificImageUpload(event, key) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const img = document.getElementById(`preview-${key}-img`);
-      const textGroup = document.getElementById(`text-group-${key}`);
-      const removeBtn = document.getElementById(`btn-remove-${key}`);
-
-      if (img && textGroup && removeBtn) {
-        img.src = e.target.result;
-        img.classList.remove('hidden');
-        textGroup.classList.add('hidden');
-        removeBtn.classList.remove('hidden');
-      }
-    };
-    reader.readAsDataURL(file);
-  }
-}
-
-function removeSpecificImage(key) {
-  const img = document.getElementById(`preview-${key}-img`);
-  const textGroup = document.getElementById(`text-group-${key}`);
-  const removeBtn = document.getElementById(`btn-remove-${key}`);
-  const input = document.getElementById(`input-${key}-photo`);
-
-  if (img && textGroup && removeBtn) {
-    img.src = '';
-    img.classList.add('hidden');
-    textGroup.classList.remove('hidden');
-    removeBtn.classList.add('hidden');
-  }
-  if (input) input.value = '';
-}
-
-// UPLOAD DA ABA ADICIONAL
+// GERENCIADOR DE UPLOAD DE FOTO (MÓDULO ADICIONAL)
 function handleImageUpload(event) {
   const file = event.target.files[0];
   if (file) {
@@ -419,7 +327,7 @@ function removeUserImage() {
   input.value = '';
 }
 
-// INICIALIZAÇÃO GERAL AO CARREGAR A PÁGINA
+// INICIALIZAÇÃO GERAL
 window.onload = function() {
   initSoundSimulator();
   renderSchoolMeasurements();
@@ -427,3 +335,5 @@ window.onload = function() {
   updateLcdDisplay();
   renderAiLogs();
 };
+
+```
