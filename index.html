@@ -11,52 +11,10 @@
   <!-- CSS Customizado -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col transition-all duration-200">
-
-  <!-- BARRA DE ACESSIBILIDADE FIXA -->
-  <aside aria-label="Ferramentas de Acessibilidade" class="bg-slate-950 border-b border-slate-800 text-slate-300 py-2 px-4 sticky top-0 z-50 shadow-md">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-xs">
-      
-      <!-- Ajuste de Fonte e Contraste -->
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="font-semibold text-slate-400 flex items-center gap-1">
-          <i class="fa-solid fa-universal-access text-cyan-400"></i> Acessibilidade:
-        </span>
-        <button onclick="changeFontSize(1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Aumentar Fonte">
-          <i class="fa-solid fa-font"></i> A+
-        </button>
-        <button onclick="changeFontSize(-1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Diminuir Fonte">
-          <i class="fa-solid fa-font"></i> A-
-        </button>
-        <button onclick="resetFontSize()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Tamanho Padrão">
-          A (Normal)
-        </button>
-        <button onclick="toggleHighContrast()" id="btn-contrast" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 rounded border border-amber-500/40 font-medium flex items-center gap-1">
-          <i class="fa-solid fa-circle-half-stroke"></i> Alto Contraste
-        </button>
-      </div>
-
-      <!-- Leitor de Tela (Voz) -->
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="font-semibold text-slate-400 flex items-center gap-1">
-          <i class="fa-solid fa-volume-high text-indigo-400"></i> Leitor de Voz:
-        </span>
-        <button onclick="readActiveTabContent()" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-medium flex items-center gap-1">
-          <i class="fa-solid fa-play"></i> Ler Conteúdo
-        </button>
-        <button onclick="pauseSpeech()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Pausar / Retomar Voz">
-          <i class="fa-solid fa-pause"></i> Pausar
-        </button>
-        <button onclick="stopSpeech()" class="px-2 py-1 bg-red-900/50 hover:bg-red-800/50 text-red-300 rounded border border-red-700" title="Parar Leitura">
-          <i class="fa-solid fa-stop"></i> Parar
-        </button>
-      </div>
-
-    </div>
-  </aside>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
   <!-- Header -->
-  <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700 shadow-lg">
+  <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700 sticky top-0 z-50 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="flex items-center gap-3">
         <div class="bg-gradient-to-tr from-cyan-500 to-indigo-500 p-2.5 rounded-xl shadow-md text-white">
@@ -202,21 +160,21 @@
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-            <h3 class="font-bold text-cyan-400 mb-1 flex items-center gap-1.5"><i class="fa-solid fa-universal-access"></i> Acessibilidade</h3>
+            <h4 class="font-bold text-cyan-400 mb-1"><i class="fa-solid fa-universal-access"></i> Acessibilidade</h4>
             <p class="text-xs text-slate-300">Garantia de que qualquer pessoa, independentemente de suas limitações físicas ou sensoriais, possa acessar espaços e informações.</p>
           </div>
           <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-            <h3 class="font-bold text-indigo-400 mb-1 flex items-center gap-1.5"><i class="fa-solid fa-comments"></i> Comunicação</h3>
+            <h4 class="font-bold text-indigo-400 mb-1"><i class="fa-solid fa-comments"></i> Comunicação</h4>
             <p class="text-xs text-slate-300">Troca eficaz de dados e sentimentos através de sinais visuais, sonoros ou textuais adaptados.</p>
           </div>
           <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-            <h3 class="font-bold text-emerald-400 mb-1 flex items-center gap-1.5"><i class="fa-solid fa-heart"></i> Qualidade de Vida</h3>
+            <h4 class="font-bold text-emerald-400 mb-1"><i class="fa-solid fa-heart"></i> Qualidade de Vida</h4>
             <p class="text-xs text-slate-300">Condições que promovem o bem-estar, reduzindo o estresse e favorecendo a autonomia individual.</p>
           </div>
         </div>
 
         <div class="p-4 bg-slate-900/80 rounded-xl border-l-4 border-cyan-500 space-y-2">
-          <h3 class="font-semibold text-slate-200">Cenário Real de Barreira:</h3>
+          <h4 class="font-semibold text-slate-200">Cenário Real de Barreira:</h4>
           <p class="text-sm text-slate-300">
             Uma pessoa com deficiência auditiva em uma estação de trem movimentada não consegue ouvir os avisos sonoros de alteração de plataforma, perdendo o transporte por falta de sinalização visual em tempo real.
           </p>
@@ -226,11 +184,9 @@
 
     <!-- ABA 3: MATRIZ DE LEDS -->
     <section id="tab-robotica-matriz" class="tab-content space-y-6">
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-6">
-        <div>
-          <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte B</span>
-          <h2 class="text-2xl font-bold mt-2">Matriz de LEDs (Simulador 8x8)</h2>
-        </div>
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte B</span>
+        <h2 class="text-2xl font-bold">Matriz de LEDs (Simulador 8x8)</h2>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <!-- Grade Interativa -->
@@ -250,7 +206,7 @@
           <div class="space-y-4 text-sm text-slate-300">
             <p><strong>Como Funciona:</strong> A matriz acende LEDs individuais em linhas e colunas para formar desenhos e mensagens universais rapidamente compreensíveis.</p>
             <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-700">
-              <h3 class="font-semibold text-cyan-400 text-xs mb-1">Código Gerado (C++ Arduino):</h3>
+              <h4 class="font-semibold text-cyan-400 text-xs mb-1">Código Gerado (C++ Arduino):</h4>
               <pre id="led-matrix-code" class="text-[10px] font-mono text-emerald-400 overflow-x-auto p-2 bg-slate-950 rounded">B00000000, ...</pre>
             </div>
             <ul class="list-disc pl-5 space-y-1 text-xs">
@@ -259,44 +215,19 @@
             </ul>
           </div>
         </div>
-
-        <!-- ÁREA PARA ADICIONAR FOTO DA MATRIZ -->
-        <div class="bg-slate-900/60 p-6 rounded-xl border-2 border-dashed border-slate-700 flex flex-col items-center justify-center space-y-4">
-          <div id="matriz-placeholder-zone" class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
-            <img id="preview-matriz-img" src="" alt="Foto da Matriz de LEDs" class="hidden absolute inset-0 w-full h-full object-cover">
-            <div id="text-group-matriz" class="space-y-2">
-              <i class="fa-solid fa-image text-4xl text-slate-600"></i>
-              <p class="text-xs text-slate-400 font-semibold">[ Sua foto / imagem aqui ]</p>
-              <p class="text-[10px] text-slate-500">Foto do projeto de Matriz de LEDs (Tinkercad ou montagem física)</p>
-            </div>
-          </div>
-          
-          <div class="flex items-center gap-3">
-            <input type="file" id="input-matriz-photo" accept="image/*" class="hidden" onchange="handleSpecificImageUpload(event, 'matriz')">
-            <button onclick="document.getElementById('input-matriz-photo').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
-              <i class="fa-solid fa-upload"></i> Carregar Foto
-            </button>
-            <button onclick="removeSpecificImage('matriz')" id="btn-remove-matriz" class="hidden bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs px-3 py-2 rounded-lg transition">
-              Remover Foto
-            </button>
-          </div>
-        </div>
-
       </div>
     </section>
 
     <!-- ABA 4: CÓDIGO MORSE -->
     <section id="tab-robotica-morse" class="tab-content space-y-6">
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-6">
-        <div>
-          <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte C</span>
-          <h2 class="text-2xl font-bold mt-2">Código Morse (Emissor Luz & Som)</h2>
-        </div>
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte C</span>
+        <h2 class="text-2xl font-bold">Código Morse (Emissor Luz & Som)</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-slate-950 p-6 rounded-xl border border-slate-700 space-y-4">
             <div>
-              <label for="morse-input" class="text-xs text-slate-400">Digite uma palavra para transmitir:</label>
+              <label class="text-xs text-slate-400">Digite uma palavra para transmitir:</label>
               <div class="flex gap-2 mt-1">
                 <input type="text" id="morse-input" value="SOS" class="bg-slate-900 border border-slate-700 rounded px-3 py-1.5 text-sm w-full uppercase font-mono text-cyan-400">
                 <button onclick="playMorseCode()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-1.5 rounded text-xs font-bold transition flex items-center gap-1">
@@ -321,7 +252,7 @@
           </div>
 
           <div class="space-y-3 text-sm text-slate-300">
-            <h3 class="font-semibold text-cyan-400">Acessibilidade e Aplicação:</h3>
+            <h4 class="font-semibold text-cyan-400">Acessibilidade e Aplicação:</h4>
             <p class="text-xs leading-relaxed">
               O Código Morse traduz texto em pulsos curtos (.) e longos (-). É ideal para situações de emergência onde a comunicação verbal é impossível ou onde apenas um botão de acionamento simplificado está disponível.
             </p>
@@ -331,39 +262,14 @@
             </div>
           </div>
         </div>
-
-        <!-- ÁREA PARA ADICIONAR FOTO DO MORSE -->
-        <div class="bg-slate-900/60 p-6 rounded-xl border-2 border-dashed border-slate-700 flex flex-col items-center justify-center space-y-4">
-          <div id="morse-placeholder-zone" class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
-            <img id="preview-morse-img" src="" alt="Foto do Código Morse" class="hidden absolute inset-0 w-full h-full object-cover">
-            <div id="text-group-morse" class="space-y-2">
-              <i class="fa-solid fa-image text-4xl text-slate-600"></i>
-              <p class="text-xs text-slate-400 font-semibold">[ Sua foto / imagem aqui ]</p>
-              <p class="text-[10px] text-slate-500">Foto do circuito de Código Morse (Buzzer, LED ou Botão)</p>
-            </div>
-          </div>
-          
-          <div class="flex items-center gap-3">
-            <input type="file" id="input-morse-photo" accept="image/*" class="hidden" onchange="handleSpecificImageUpload(event, 'morse')">
-            <button onclick="document.getElementById('input-morse-photo').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
-              <i class="fa-solid fa-upload"></i> Carregar Foto
-            </button>
-            <button onclick="removeSpecificImage('morse')" id="btn-remove-morse" class="hidden bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs px-3 py-2 rounded-lg transition">
-              Remover Foto
-            </button>
-          </div>
-        </div>
-
       </div>
     </section>
 
     <!-- ABA 5: DISPLAY LCD -->
     <section id="tab-robotica-display" class="tab-content space-y-6">
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-6">
-        <div>
-          <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte D</span>
-          <h2 class="text-2xl font-bold mt-2">Display LCD (Simulador 16x2)</h2>
-        </div>
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte D</span>
+        <h2 class="text-2xl font-bold">Display LCD (Simulador 16x2)</h2>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="bg-slate-950 p-6 rounded-xl border border-slate-700 space-y-4">
@@ -384,7 +290,7 @@
           </div>
 
           <div class="space-y-3 text-sm text-slate-300">
-            <h3 class="font-semibold text-emerald-400">Aplicação em Acessibilidade:</h3>
+            <h4 class="font-semibold text-emerald-400">Aplicação em Acessibilidade:</h4>
             <p class="text-xs leading-relaxed">
               Displays LCD fornecem orientações textuais diretas para senhas de atendimento, nomes de paradas de ônibus e alertas de emergência, sendo fundamentais para pessoas surdas ou com deficiência auditiva.
             </p>
@@ -394,29 +300,6 @@
             </ul>
           </div>
         </div>
-
-        <!-- ÁREA PARA ADICIONAR FOTO DO LCD -->
-        <div class="bg-slate-900/60 p-6 rounded-xl border-2 border-dashed border-slate-700 flex flex-col items-center justify-center space-y-4">
-          <div id="display-placeholder-zone" class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
-            <img id="preview-display-img" src="" alt="Foto do Display LCD" class="hidden absolute inset-0 w-full h-full object-cover">
-            <div id="text-group-display" class="space-y-2">
-              <i class="fa-solid fa-image text-4xl text-slate-600"></i>
-              <p class="text-xs text-slate-400 font-semibold">[ Sua foto / imagem aqui ]</p>
-              <p class="text-[10px] text-slate-500">Foto da tela do Display LCD 16x2 em funcionamento</p>
-            </div>
-          </div>
-          
-          <div class="flex items-center gap-3">
-            <input type="file" id="input-display-photo" accept="image/*" class="hidden" onchange="handleSpecificImageUpload(event, 'display')">
-            <button onclick="document.getElementById('input-display-photo').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
-              <i class="fa-solid fa-upload"></i> Carregar Foto
-            </button>
-            <button onclick="removeSpecificImage('display')" id="btn-remove-display" class="hidden bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs px-3 py-2 rounded-lg transition">
-              Remover Foto
-            </button>
-          </div>
-        </div>
-
       </div>
     </section>
 
@@ -441,4 +324,155 @@
               <tr class="hover:bg-slate-700/20">
                 <td class="p-3 font-bold text-cyan-400">Matriz de LEDs</td>
                 <td class="p-3">Símbolos, ícones, direções e emoções.</td>
-                <td class="p-3">Visual (Lumin
+                <td class="p-3">Visual (Luminoso)</td>
+                <td class="p-3">Sinalização de rotas e alertas em locais barulhentos.</td>
+                <td class="p-3">Baixa resolução. Exige interpretação prévia do ícone.</td>
+              </tr>
+              <tr class="hover:bg-slate-700/20">
+                <td class="p-3 font-bold text-amber-400">Código Morse</td>
+                <td class="p-3">Letras e mensagens codificadas em pulsos.</td>
+                <td class="p-3">Sonoro ou Visual</td>
+                <td class="p-3">Pedir socorro e chamadas de emergência com acionador simples.</td>
+                <td class="p-3">Requer conhecimento do código pelo emissor e receptor.</td>
+              </tr>
+              <tr class="hover:bg-slate-700/20">
+                <td class="p-3 font-bold text-emerald-400">Display LCD</td>
+                <td class="p-3">Textos alfa-numéricos estruturados.</td>
+                <td class="p-3">Visual (Texto)</td>
+                <td class="p-3">Painéis de senha, instrução de uso e guichês.</td>
+                <td class="p-3">Não atende pessoas cegas sem síntese de voz acoplada.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 7: ESTUDO DE CASO -->
+    <section id="tab-robotica-caso" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte F</span>
+        <h2 class="text-2xl font-bold">Análise de Situação Concreta</h2>
+        
+        <div class="p-4 bg-slate-900/80 rounded-xl border border-slate-700 space-y-3">
+          <h3 class="font-bold text-cyan-400 text-base">Cenário: Sala de Espera de um Hospital Ruidoso</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Em uma sala de espera cheia de um hospital, pessoas com deficiência auditiva não escutam o alto-falante chamando seus nomes, enquanto autistas com hipersensibilidade sofrem com o ruído ambiente.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+            <div class="p-3 bg-slate-800 rounded border border-slate-700 text-xs space-y-1">
+              <strong class="text-cyan-400 block">Matriz de LEDs:</strong>
+              Exibe uma seta indicando qual sala está aberta no momento.
+            </div>
+            <div class="p-3 bg-slate-800 rounded border border-slate-700 text-xs space-y-1">
+              <strong class="text-amber-400 block">Código Morse:</strong>
+              Emite um aviso suave e silencioso (pulsos de luz no teto) para alerta geral.
+            </div>
+            <div class="p-3 bg-slate-800 rounded border border-slate-700 text-xs space-y-1">
+              <strong class="text-emerald-400 block">Display LCD:</strong>
+              Mostra o nome do paciente e a sala exata em texto legível.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 8: AUDITORIA DE IA -->
+    <section id="tab-robotica-ia" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte G</span>
+            <h2 class="text-2xl font-bold">Uso Responsável e Auditoria de IA</h2>
+          </div>
+          <button onclick="addAiAuditRow()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3 py-2 rounded-lg transition flex items-center gap-1.5">
+            <i class="fa-solid fa-plus"></i> Novo Registro de Prompt
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm text-slate-300">
+            <thead class="bg-slate-900/80 text-slate-400 text-xs uppercase border-b border-slate-700">
+              <tr>
+                <th class="p-3">Pergunta / Prompt</th>
+                <th class="p-3">Resposta da IA</th>
+                <th class="p-3">Como Verificamos?</th>
+                <th class="p-3">O que Alteramos?</th>
+                <th class="p-3">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="ai-logs-body" class="divide-y divide-slate-700/50">
+              <!-- Linhas preenchidas pelo JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 9: MÓDULO ADICIONAL (RESERVADO) -->
+    <section id="tab-novo-projeto" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+          <div>
+            <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Espaço Reservado</span>
+            <h2 class="text-2xl font-bold text-slate-100 mt-1">[ Título do Projeto do Novo Professor ]</h2>
+            <p class="text-xs text-slate-400">Estrutura preparada para receber as novas instruções e conteúdos da professora.</p>
+          </div>
+          <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+            <i class="fa-solid fa-hourglass-half"></i> Aguardando Material
+          </span>
+        </div>
+
+        <!-- Área de Upload e Preview de Imagem -->
+        <div class="bg-slate-900/60 p-6 rounded-xl border-2 border-dashed border-slate-700 flex flex-col items-center justify-center space-y-4">
+          <div id="image-placeholder-zone" class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
+            <img id="preview-user-img" src="" class="hidden absolute inset-0 w-full h-full object-cover">
+            <div id="placeholder-text-group" class="space-y-2">
+              <i class="fa-solid fa-image text-4xl text-slate-600"></i>
+              <p class="text-xs text-slate-400 font-semibold">[ Sua foto / imagem aqui ]</p>
+              <p class="text-[10px] text-slate-500">Envie um arquivo para testar a visualização na moldura</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <input type="file" id="user-photo-input" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+            <button onclick="document.getElementById('user-photo-input').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
+              <i class="fa-solid fa-upload"></i> Carregar Foto
+            </button>
+            <button onclick="removeUserImage()" id="btn-remove-img" class="hidden bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs px-3 py-2 rounded-lg transition">
+              Remover Foto
+            </button>
+          </div>
+        </div>
+
+        <!-- Blocos de Texto Placeholder -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-700/60 space-y-2">
+            <h4 class="font-semibold text-cyan-400 text-sm">[ Insira o Título da Seção 1 ]</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              [ Insira o texto da professora aqui. Este espaço já está formatado com as cores e o estilo das outras abas para manter o padrão do site. ]
+            </p>
+          </div>
+          <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-700/60 space-y-2">
+            <h4 class="font-semibold text-indigo-400 text-sm">[ Insira o Título da Seção 2 ]</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              [ Insira o texto da professora aqui. Você poderá adicionar tópicos, listas de verificação ou orientações assim que forem divulgados. ]
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500 mt-auto">
+    <p>Projeto Integrador: Inteligência Artificial e Tecnologias • Escola 2026</p>
+  </footer>
+
+  <!-- JS Customizado -->
+  <script src="script.js"></script>
+</body>
+</html>
+
+```
