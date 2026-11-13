@@ -4,11 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ciência do Som, Robótica e Acessibilidade</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- CSS Customizado -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col transition-all duration-200">
@@ -16,42 +13,38 @@
   <!-- BARRA DE ACESSIBILIDADE FIXA -->
   <aside aria-label="Ferramentas de Acessibilidade" class="bg-slate-950 border-b border-slate-800 text-slate-300 py-2 px-4 sticky top-0 z-50 shadow-md">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-xs">
-      
-      <!-- Ajuste de Fonte e Contraste -->
       <div class="flex items-center gap-2 flex-wrap">
         <span class="font-semibold text-slate-400 flex items-center gap-1">
           <i class="fa-solid fa-universal-access text-cyan-400"></i> Acessibilidade:
         </span>
-        <button onclick="changeFontSize(1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Aumentar Fonte">
+        <button type="button" onclick="changeFontSize(1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Aumentar Fonte">
           <i class="fa-solid fa-font"></i> A+
         </button>
-        <button onclick="changeFontSize(-1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Diminuir Fonte">
+        <button type="button" onclick="changeFontSize(-1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Diminuir Fonte">
           <i class="fa-solid fa-font"></i> A-
         </button>
-        <button onclick="resetFontSize()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Tamanho Padrão">
+        <button type="button" onclick="resetFontSize()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Tamanho Padrão">
           A (Normal)
         </button>
-        <button onclick="toggleHighContrast()" id="btn-contrast" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 rounded border border-amber-500/40 font-medium flex items-center gap-1">
+        <button type="button" onclick="toggleHighContrast()" id="btn-contrast" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 rounded border border-amber-500/40 font-medium flex items-center gap-1">
           <i class="fa-solid fa-circle-half-stroke"></i> Alto Contraste
         </button>
       </div>
 
-      <!-- Leitor de Tela (Voz) -->
       <div class="flex items-center gap-2 flex-wrap">
         <span class="font-semibold text-slate-400 flex items-center gap-1">
           <i class="fa-solid fa-volume-high text-indigo-400"></i> Leitor de Voz:
         </span>
-        <button onclick="readActiveTabContent()" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-medium flex items-center gap-1">
+        <button type="button" onclick="readActiveTabContent()" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-medium flex items-center gap-1">
           <i class="fa-solid fa-play"></i> Ler Conteúdo
         </button>
-        <button onclick="pauseSpeech()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Pausar / Retomar Voz">
+        <button type="button" onclick="pauseSpeech()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Pausar / Retomar Voz">
           <i class="fa-solid fa-pause"></i> Pausar
         </button>
-        <button onclick="stopSpeech()" class="px-2 py-1 bg-red-900/50 hover:bg-red-800/50 text-red-300 rounded border border-red-700" title="Parar Leitura">
+        <button type="button" onclick="stopSpeech()" class="px-2 py-1 bg-red-900/50 hover:bg-red-800/50 text-red-300 rounded border border-red-700" title="Parar Leitura">
           <i class="fa-solid fa-stop"></i> Parar
         </button>
       </div>
-
     </div>
   </aside>
 
@@ -72,35 +65,35 @@
 
       <!-- Abas de Navegação -->
       <nav class="flex flex-wrap gap-1.5 justify-center">
-        <button onclick="switchTab('fisica')" id="btn-tab-fisica" class="tab-btn active px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <button type="button" onclick="switchTab('fisica')" id="btn-tab-fisica" class="tab-btn active px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
           <i class="fa-solid fa-wave-square"></i> Física do Som
         </button>
-        <button onclick="switchTab('robotica-apresentacao')" id="btn-tab-robotica-apresentacao" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <button type="button" onclick="switchTab('robotica-apresentacao')" id="btn-tab-robotica-apresentacao" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
           <i class="fa-solid fa-book-open"></i> Apresentação
         </button>
-        <button onclick="switchTab('robotica-matriz')" id="btn-tab-robotica-matriz" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <button type="button" onclick="switchTab('robotica-matriz')" id="btn-tab-robotica-matriz" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
           <i class="fa-solid fa-border-all"></i> Matriz de LEDs
         </button>
-        <button onclick="switchTab('robotica-morse')" id="btn-tab-robotica-morse" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <button type="button" onclick="switchTab('robotica-morse')" id="btn-tab-robotica-morse" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
           <i class="fa-solid fa-signal"></i> Código Morse
         </button>
-        <button onclick="switchTab('robotica-display')" id="btn-tab-robotica-display" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <button type="button" onclick="switchTab('robotica-display')" id="btn-tab-robotica-display" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
           <i class="fa-solid fa-tv"></i> Display LCD
         </button>
-        <button onclick="switchTab('robotica-comparacao')" id="btn-tab-robotica-comparacao" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <button type="button" onclick="switchTab('cofre')" id="btn-tab-cofre" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+          <i class="fa-solid fa-vault"></i> Cofre
+        </button>
+        <button type="button" onclick="switchTab('robotica-comparacao')" id="btn-tab-robotica-comparacao" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
           <i class="fa-solid fa-table"></i> Comparação
         </button>
-        <button onclick="switchTab('robotica-caso')" id="btn-tab-robotica-caso" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <button type="button" onclick="switchTab('robotica-caso')" id="btn-tab-robotica-caso" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
           <i class="fa-solid fa-users-viewfinder"></i> Estudo de Caso
         </button>
-        <button onclick="switchTab('robotica-ia')" id="btn-tab-robotica-ia" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <button type="button" onclick="switchTab('robotica-ia')" id="btn-tab-robotica-ia" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
           <i class="fa-solid fa-robot"></i> Auditoria de IA
         </button>
-        <button onclick="switchTab('novo-projeto')" id="btn-tab-novo-projeto" class="tab-btn border border-dashed border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/10 px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+        <button type="button" onclick="switchTab('novo-projeto')" id="btn-tab-novo-projeto" class="tab-btn border border-dashed border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/10 px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
           <i class="fa-solid fa-plus-circle text-cyan-400"></i> Módulo Adicional
-        </button>
-        <button onclick="switchTab('cofre')" id="btn-tab-cofre" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-vault"></i> Cofre
         </button>
       </nav>
     </div>
@@ -129,14 +122,14 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div class="space-y-4 bg-slate-900/60 p-4 rounded-xl border border-slate-700">
             <div>
-              <label class="text-sm font-medium text-slate-300 flex justify-between">
+              <label for="freq-slider" class="text-sm font-medium text-slate-300 flex justify-between">
                 <span>Frequência (Grave vs Agudo):</span>
                 <span id="freq-val" class="text-cyan-400 font-bold">440 Hz</span>
               </label>
               <input type="range" id="freq-slider" min="100" max="1000" value="440" class="w-full mt-2 accent-cyan-400">
             </div>
             <div>
-              <label class="text-sm font-medium text-slate-300 flex justify-between">
+              <label for="amp-slider" class="text-sm font-medium text-slate-300 flex justify-between">
                 <span>Intensidade (Fraco vs Forte):</span>
                 <span id="amp-val" class="text-indigo-400 font-bold">60 dB</span>
               </label>
@@ -166,11 +159,16 @@
             <h3 class="text-lg font-semibold text-cyan-400 flex items-center gap-2">
               <i class="fa-solid fa-clipboard-list"></i> Tabela de Medições na Escola
             </h3>
-            <p class="text-xs text-slate-400">Registros coletados com aplicativo decibelímetro</p>
+            <p class="text-xs text-slate-400">Registros coletados com aplicativo decibelímetro (editáveis direto no script.js ou pelo botão abaixo)</p>
           </div>
-          <button onclick="addSchoolMeasurementRow()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3 py-2 rounded-lg flex items-center gap-1.5 transition">
-            <i class="fa-solid fa-plus"></i> Adicionar Medição
-          </button>
+          <div class="flex gap-2">
+            <button type="button" onclick="addSchoolMeasurementRow()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3 py-2 rounded-lg flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-plus"></i> Adicionar Medição
+            </button>
+            <button type="button" onclick="resetSchoolMeasurements()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs px-3 py-2 rounded-lg flex items-center gap-1.5 transition" title="Restaurar dados do código">
+              <i class="fa-solid fa-rotate-left"></i> Restaurar Padrão
+            </button>
+          </div>
         </div>
 
         <div class="overflow-x-auto">
@@ -185,7 +183,7 @@
               </tr>
             </thead>
             <tbody id="school-measurements-body" class="divide-y divide-slate-700/50">
-              <!-- Linhas adicionadas via JS -->
+              <!-- Linhas preenchidas pelo script.js -->
             </tbody>
           </table>
         </div>
@@ -234,22 +232,386 @@
         <h2 class="text-2xl font-bold">Matriz de LEDs (Simulador 8x8)</h2>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <!-- Grade Interativa -->
           <div class="flex flex-col items-center bg-slate-950 p-6 rounded-xl border border-slate-700">
-            <div id="led-grid-container" class="grid grid-cols-8 gap-1.5 p-3 bg-slate-900 rounded-lg border border-slate-800 mb-4">
-              <!-- Gerado via JS -->
-            </div>
+            <div id="led-grid-container" class="grid grid-cols-8 gap-1.5 p-3 bg-slate-900 rounded-lg border border-slate-800 mb-4"></div>
             <div class="flex flex-wrap gap-2 justify-center">
-              <button onclick="loadLedPreset('smile')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs rounded border border-slate-600">Smile 😊</button>
-              <button onclick="loadLedPreset('help')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs rounded border border-slate-600">Help 🆘</button>
-              <button onclick="loadLedPreset('arrow')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs rounded border border-slate-600">Seta ➡️</button>
-              <button onclick="loadLedPreset('clear')" class="px-3 py-1.5 bg-red-900/50 hover:bg-red-800/50 text-xs rounded border border-red-700 text-red-300">Limpar</button>
+              <button type="button" onclick="loadLedPreset('smile')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs rounded border border-slate-600">Smile 😊</button>
+              <button type="button" onclick="loadLedPreset('help')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs rounded border border-slate-600">Help 🆘</button>
+              <button type="button" onclick="loadLedPreset('arrow')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs rounded border border-slate-600">Seta ➡️</button>
+              <button type="button" onclick="loadLedPreset('clear')" class="px-3 py-1.5 bg-red-900/50 hover:bg-red-800/50 text-xs rounded border border-red-700 text-red-300">Limpar</button>
             </div>
           </div>
 
-          <!-- Explicações -->
           <div class="space-y-4 text-sm text-slate-300">
             <p><strong>Como Funciona:</strong> A matriz acende LEDs individuais em linhas e colunas para formar desenhos e mensagens universais rapidamente compreensíveis.</p>
             <div class="p-3 bg-slate-900/80 rounded-lg border border-slate-700">
               <h3 class="font-semibold text-cyan-400 text-xs mb-1">Código Gerado (C++ Arduino):</h3>
-              <pre id="led-matrix-code" class="text-[10px] font-mono text
+              <pre id="led-matrix-code" class="text-[10px] font-mono text-emerald-400 overflow-x-auto p-2 bg-slate-950 rounded">B00000000, ...</pre>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-xs">
+              <li><strong>Vantagem:</strong> Comunicação não-verbal rápida e visível no escuro.</li>
+              <li><strong>Limitação:</strong> Resolução baixa para textos longos e dependência de visibilidade direta.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ESPAÇO PARA FOTO DO PROJETO (MATRIZ DE LEDS) -->
+        <div class="mt-4 p-4 bg-slate-900/60 rounded-xl border border-slate-700 space-y-3">
+          <h3 class="font-bold text-cyan-400 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-camera"></i> Foto do Projeto: Matriz de LEDs
+          </h3>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input type="text" id="link-matriz" placeholder="Cole o link da sua foto aqui (ou envie um arquivo ao lado)..." oninput="updatePhotoUrl('matriz')" class="flex-grow bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200">
+            <input type="file" id="file-matriz" accept="image/*" class="hidden" onchange="handleProjectFileUpload(event, 'matriz')">
+            <button type="button" onclick="document.getElementById('file-matriz').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3 py-1.5 rounded font-medium transition">
+              <i class="fa-solid fa-upload"></i> Escolher Foto
+            </button>
+          </div>
+          <div class="w-full max-w-md h-52 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center">
+            <img id="img-matriz" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop" alt="Foto do Projeto Matriz de LEDs" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 4: CÓDIGO MORSE -->
+    <section id="tab-robotica-morse" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte C</span>
+        <h2 class="text-2xl font-bold">Código Morse (Emissor Luz & Som)</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-slate-950 p-6 rounded-xl border border-slate-700 space-y-4">
+            <div>
+              <label for="morse-input" class="text-xs text-slate-400">Digite uma palavra para transmitir:</label>
+              <div class="flex gap-2 mt-1">
+                <input type="text" id="morse-input" value="SOS" class="bg-slate-900 border border-slate-700 rounded px-3 py-1.5 text-sm w-full uppercase font-mono text-cyan-400">
+                <button type="button" onclick="playMorseCode()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-1.5 rounded text-xs font-bold transition flex items-center gap-1">
+                  <i class="fa-solid fa-play"></i> Emitir
+                </button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-around p-4 bg-slate-900 rounded-lg border border-slate-800">
+              <div class="text-center">
+                <div id="morse-led" class="w-12 h-12 rounded-full bg-slate-800 border-2 border-slate-600 mx-auto transition-all duration-75"></div>
+                <span class="text-[10px] text-slate-400 mt-1 block">LED Visual</span>
+              </div>
+              <div class="text-center">
+                <div id="morse-signal-text" class="text-xl font-mono font-bold text-amber-400 tracking-widest h-8 flex items-center">
+                  ... --- ...
+                </div>
+                <span class="text-[10px] text-slate-400 mt-1 block">Código Traduzido</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-sm text-slate-300">
+            <h3 class="font-semibold text-cyan-400">Acessibilidade e Aplicação:</h3>
+            <p class="text-xs leading-relaxed">
+              O Código Morse traduz texto em pulsos curtos (.) e longos (-). É ideal para situações de emergência onde a comunicação verbal é impossível ou onde apenas um botão de acionamento simplificado está disponível.
+            </p>
+            <div class="p-3 bg-slate-900/60 rounded-lg text-xs border border-slate-700 space-y-1">
+              <p><strong>Exemplo SOS:</strong> <code>... --- ...</code> (3 curtos, 3 longos, 3 curtos)</p>
+              <p><strong>Adaptação:</strong> Pode ser acionado por piscar de olhos ou sopro para pessoas com tetraplegia.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESPAÇO PARA FOTO DO PROJETO (CÓDIGO MORSE) -->
+        <div class="mt-4 p-4 bg-slate-900/60 rounded-xl border border-slate-700 space-y-3">
+          <h3 class="font-bold text-cyan-400 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-camera"></i> Foto do Projeto: Código Morse
+          </h3>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input type="text" id="link-morse" placeholder="Cole o link da sua foto aqui (ou envie um arquivo ao lado)..." oninput="updatePhotoUrl('morse')" class="flex-grow bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200">
+            <input type="file" id="file-morse" accept="image/*" class="hidden" onchange="handleProjectFileUpload(event, 'morse')">
+            <button type="button" onclick="document.getElementById('file-morse').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3 py-1.5 rounded font-medium transition">
+              <i class="fa-solid fa-upload"></i> Escolher Foto
+            </button>
+          </div>
+          <div class="w-full max-w-md h-52 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center">
+            <img id="img-morse" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&auto=format&fit=crop" alt="Foto do Projeto Código Morse" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 5: DISPLAY LCD -->
+    <section id="tab-robotica-display" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte D</span>
+        <h2 class="text-2xl font-bold">Display LCD (Simulador 16x2)</h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-slate-950 p-6 rounded-xl border border-slate-700 space-y-4">
+            <div class="bg-emerald-900/80 border-4 border-emerald-950 p-4 rounded-lg shadow-inner font-mono text-emerald-200 space-y-1">
+              <div id="lcd-line-1" class="bg-emerald-950/60 px-2 py-1 rounded tracking-widest text-sm h-7 overflow-hidden whitespace-pre">
+                BEM-VINDO!
+              </div>
+              <div id="lcd-line-2" class="bg-emerald-950/60 px-2 py-1 rounded tracking-widest text-sm h-7 overflow-hidden whitespace-pre">
+                ACESSIVEL 16X2
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <input type="text" id="lcd-input-1" value="PROXIMO: SENHA 42" maxlength="16" oninput="updateLcdDisplay()" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-1 text-xs font-mono text-emerald-400" placeholder="Linha 1 (máx 16 caracteres)">
+              <input type="text" id="lcd-input-2" value="GUICHE 02 - POR FAVOR" maxlength="16" oninput="updateLcdDisplay()" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-1 text-xs font-mono text-emerald-400" placeholder="Linha 2 (máx 16 caracteres)">
+            </div>
+          </div>
+
+          <div class="space-y-3 text-sm text-slate-300">
+            <h3 class="font-semibold text-emerald-400">Aplicação em Acessibilidade:</h3>
+            <p class="text-xs leading-relaxed">
+              Displays LCD fornecem orientações textuais diretas para senhas de atendimento, nomes de paradas de ônibus e alertas de emergência, sendo fundamentais para pessoas surdas ou com deficiência auditiva.
+            </p>
+            <ul class="list-disc pl-5 text-xs space-y-1">
+              <li><strong>Vantagem:</strong> Transmite frases claras e detalhadas.</li>
+              <li><strong>Limitação:</strong> Requer alfabetização e boa acuidade visual.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ESPAÇO PARA FOTO DO PROJETO (DISPLAY LCD) -->
+        <div class="mt-4 p-4 bg-slate-900/60 rounded-xl border border-slate-700 space-y-3">
+          <h3 class="font-bold text-cyan-400 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-camera"></i> Foto do Projeto: Display LCD
+          </h3>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input type="text" id="link-lcd" placeholder="Cole o link da sua foto aqui (ou envie um arquivo ao lado)..." oninput="updatePhotoUrl('lcd')" class="flex-grow bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200">
+            <input type="file" id="file-lcd" accept="image/*" class="hidden" onchange="handleProjectFileUpload(event, 'lcd')">
+            <button type="button" onclick="document.getElementById('file-lcd').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-3 py-1.5 rounded font-medium transition">
+              <i class="fa-solid fa-upload"></i> Escolher Foto
+            </button>
+          </div>
+          <div class="w-full max-w-md h-52 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center">
+            <img id="img-lcd" src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=600&auto=format&fit=crop" alt="Foto do Projeto Display LCD" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 6: COFRE ELETRÔNICO -->
+    <section id="tab-cofre" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Projeto de Robótica</span>
+          <h2 class="text-2xl font-bold">Cofre Eletrônico com Senha e Sinalização Acessível</h2>
+        </div>
+
+        <p class="text-slate-300 text-sm leading-relaxed">
+          O projeto do Cofre Eletrônico utiliza microcontrolador, teclado/botões, servo motor e sinais visuais e sonoros para garantir segurança e acessibilidade no controle de abertura e fechamento.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700 space-y-1">
+            <h3 class="font-bold text-cyan-400 text-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-lock"></i> Funcionamento
+            </h3>
+            <p class="text-xs text-slate-300">
+              Ao digitar a senha correta, o sistema aciona a trava eletrônica (servo motor) e libera a abertura da porta do cofre.
+            </p>
+          </div>
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700 space-y-1">
+            <h3 class="font-bold text-emerald-400 text-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-universal-access"></i> Acessibilidade
+            </h3>
+            <p class="text-xs text-slate-300">
+              Retorno duplo: LEDs coloridos (verde/vermelho) e display para pessoas surdas, combinados com bipes sonoros distintos para pessoas com baixa visão.
+            </p>
+          </div>
+          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700 space-y-1">
+            <h3 class="font-bold text-amber-400 text-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved"></i> Segurança
+            </h3>
+            <p class="text-xs text-slate-300">
+              Bloqueio automático após tentativas incorretas e alerta visual/sonoro indicando acesso negado.
+            </p>
+          </div>
+        </div>
+
+        <!-- ESPAÇO PARA FOTO DO PROJETO (COFRE) -->
+        <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-700 space-y-3">
+          <h3 class="font-bold text-amber-400 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-camera"></i> Foto do Projeto: Cofre Eletrônico
+          </h3>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input type="text" id="link-cofre" placeholder="Cole o link da foto do cofre aqui (ou envie um arquivo ao lado)..." oninput="updatePhotoUrl('cofre')" class="flex-grow bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200">
+            <input type="file" id="file-cofre" accept="image/*" class="hidden" onchange="handleProjectFileUpload(event, 'cofre')">
+            <button type="button" onclick="document.getElementById('file-cofre').click()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs px-3 py-1.5 rounded font-medium transition">
+              <i class="fa-solid fa-upload"></i> Escolher Foto
+            </button>
+          </div>
+          <div class="w-full max-w-md h-52 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center">
+            <img id="img-cofre" src="https://images.unsplash.com/photo-1558002038-1055907df827?w=600&auto=format&fit=crop" alt="Foto do Projeto Cofre Eletrônico" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 7: TABELA COMPARATIVA -->
+    <section id="tab-robotica-comparacao" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte E</span>
+        <h2 class="text-2xl font-bold">Tabela Comparativa dos Recursos</h2>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm text-slate-300 border-collapse">
+            <thead class="bg-slate-900/80 text-slate-400 text-xs uppercase border-b border-slate-700">
+              <tr>
+                <th class="p-3">Recurso</th>
+                <th class="p-3">O que comunica?</th>
+                <th class="p-3">Tipo de Sinal</th>
+                <th class="p-3">Possível Aplicação</th>
+                <th class="p-3">Limitações e Adaptações</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-700/50 text-xs">
+              <tr class="hover:bg-slate-700/20">
+                <td class="p-3 font-bold text-cyan-400">Matriz de LEDs</td>
+                <td class="p-3">Símbolos, ícones, direções e emoções.</td>
+                <td class="p-3">Visual (Luminoso)</td>
+                <td class="p-3">Sinalização de rotas e alertas em locais barulhentos.</td>
+                <td class="p-3">Baixa resolução. Exige interpretação prévia do ícone.</td>
+              </tr>
+              <tr class="hover:bg-slate-700/20">
+                <td class="p-3 font-bold text-amber-400">Código Morse</td>
+                <td class="p-3">Letras e mensagens codificadas em pulsos.</td>
+                <td class="p-3">Sonoro ou Visual</td>
+                <td class="p-3">Pedir socorro e chamadas de emergência com acionador simples.</td>
+                <td class="p-3">Requer conhecimento do código pelo emissor e receptor.</td>
+              </tr>
+              <tr class="hover:bg-slate-700/20">
+                <td class="p-3 font-bold text-emerald-400">Display LCD</td>
+                <td class="p-3">Textos alfa-numéricos estruturados.</td>
+                <td class="p-3">Visual (Texto)</td>
+                <td class="p-3">Painéis de senha, instrução de uso e guichês.</td>
+                <td class="p-3">Não atende pessoas cegas sem síntese de voz acoplada.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 8: ESTUDO DE CASO -->
+    <section id="tab-robotica-caso" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte F</span>
+        <h2 class="text-2xl font-bold">Análise de Situação Concreta</h2>
+        
+        <div class="p-4 bg-slate-900/80 rounded-xl border border-slate-700 space-y-3">
+          <h3 class="font-bold text-cyan-400 text-base">Cenário: Sala de Espera de um Hospital Ruidoso</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Em uma sala de espera cheia de um hospital, pessoas com deficiência auditiva não escutam o alto-falante chamando seus nomes, enquanto autistas com hipersensibilidade sofrem com o ruído ambiente.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+            <div class="p-3 bg-slate-800 rounded border border-slate-700 text-xs space-y-1">
+              <strong class="text-cyan-400 block">Matriz de LEDs:</strong>
+              Exibe uma seta indicando qual sala está aberta no momento.
+            </div>
+            <div class="p-3 bg-slate-800 rounded border border-slate-700 text-xs space-y-1">
+              <strong class="text-amber-400 block">Código Morse:</strong>
+              Emite um aviso suave e silencioso (pulsos de luz no teto) para alerta geral.
+            </div>
+            <div class="p-3 bg-slate-800 rounded border border-slate-700 text-xs space-y-1">
+              <strong class="text-emerald-400 block">Display LCD:</strong>
+              Mostra o nome do paciente e a sala exata em texto legível.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 9: AUDITORIA DE IA -->
+    <section id="tab-robotica-ia" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte G</span>
+            <h2 class="text-2xl font-bold">Uso Responsável e Auditoria de IA</h2>
+          </div>
+          <button type="button" onclick="addAiAuditRow()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3 py-2 rounded-lg transition flex items-center gap-1.5">
+            <i class="fa-solid fa-plus"></i> Novo Registro de Prompt
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm text-slate-300">
+            <thead class="bg-slate-900/80 text-slate-400 text-xs uppercase border-b border-slate-700">
+              <tr>
+                <th class="p-3">Pergunta / Prompt</th>
+                <th class="p-3">Resposta da IA</th>
+                <th class="p-3">Como Verificamos?</th>
+                <th class="p-3">O que Alteramos?</th>
+                <th class="p-3">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="ai-logs-body" class="divide-y divide-slate-700/50"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 10: MÓDULO ADICIONAL (RESERVADO) -->
+    <section id="tab-novo-projeto" class="tab-content space-y-6">
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+          <div>
+            <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Espaço Reservado</span>
+            <h2 class="text-2xl font-bold text-slate-100 mt-1">[ Título do Projeto do Novo Professor ]</h2>
+            <p class="text-xs text-slate-400">Estrutura preparada para receber as novas instruções e conteúdos da professora.</p>
+          </div>
+          <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+            <i class="fa-solid fa-hourglass-half"></i> Aguardando Material
+          </span>
+        </div>
+
+        <div class="bg-slate-900/60 p-6 rounded-xl border-2 border-dashed border-slate-700 flex flex-col items-center justify-center space-y-4">
+          <div id="image-placeholder-zone" class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
+            <img id="preview-user-img" src="" alt="Pré-visualização da Imagem" class="hidden absolute inset-0 w-full h-full object-cover">
+            <div id="placeholder-text-group" class="space-y-2">
+              <i class="fa-solid fa-image text-4xl text-slate-600"></i>
+              <p class="text-xs text-slate-400 font-semibold">[ Sua foto / imagem aqui ]</p>
+              <p class="text-[10px] text-slate-500">Envie um arquivo para testar a visualização na moldura</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-3">
+            <input type="file" id="user-photo-input" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+            <button type="button" onclick="document.getElementById('user-photo-input').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
+              <i class="fa-solid fa-upload"></i> Carregar Foto
+            </button>
+            <button type="button" onclick="removeUserImage()" id="btn-remove-img" class="hidden bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs px-3 py-2 rounded-lg transition">
+              Remover Foto
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-700/60 space-y-2">
+            <h3 class="font-semibold text-cyan-400 text-sm">[ Insira o Título da Seção 1 ]</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              [ Insira o texto da professora aqui. Este espaço já está formatado com as cores e o estilo das outras abas para manter o padrão do site. ]
+            </p>
+          </div>
+          <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-700/60 space-y-2">
+            <h3 class="font-semibold text-indigo-400 text-sm">[ Insira o Título da Seção 2 ]</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              [ Insira o texto da professora aqui. Você poderá adicionar tópicos, listas de verificação ou orientações assim que forem divulgados. ]
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500 mt-auto">
+    <p>Projeto Integrador: Inteligência Artificial e Tecnologias • Escola 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

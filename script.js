@@ -1,11 +1,22 @@
-// DADOS INICIAIS
-let schoolMeasurements = [
-  { local: 'Biblioteca', data: '10/11 - 10:30', db: 42, contexto: 'Estudo silencioso', id: 1 },
-  { local: 'Sala de Aula', data: '10/11 - 11:15', db: 65, contexto: 'Explicação do professor', id: 2 },
-  { local: 'Corredor', data: '10/11 - 12:00', db: 78, contexto: 'Troca de aceno / intervalo', id: 3 },
-  { local: 'Refeitório', data: '10/11 - 12:30', db: 88, contexto: 'Horário do almoço lotado', id: 4 },
-  { local: 'Pátio', data: '10/11 - 13:15', db: 72, contexto: 'Alunos reunidos em grupos', id: 5 }
+// =========================================================================
+// EDITE AQUI AS MEDIÇÕES DAS ONDAS SONORAS DA ESCOLA PARA FICAREM SALVAS NO CÓDIGO
+// Basta alterar os valores de local, data, db e contexto ou copiar uma linha!
+// =========================================================================
+const DEFAULT_MEASUREMENTS = [
+  { id: 1, local: 'Biblioteca', data: '10/11 - 10:30', db: 42, contexto: 'Estudo silencioso' },
+  { id: 2, local: 'Sala de Aula', data: '10/11 - 11:15', db: 65, contexto: 'Explicação do professor' },
+  { id: 3, local: 'Corredor', data: '10/11 - 12:00', db: 78, contexto: 'Troca de aula / intervalo' },
+  { id: 4, local: 'Refeitório', data: '10/11 - 12:30', db: 88, contexto: 'Horário do almoço lotado' },
+  { id: 5, local: 'Pátio', data: '10/11 - 13:15', db: 72, contexto: 'Alunos reunidos em grupos' }
 ];
+// =========================================================================
+
+// Carrega as medições salvas no navegador ou usa as definidas acima no código
+let schoolMeasurements = JSON.parse(localStorage.getItem('schoolMeasurements_v2')) || [...DEFAULT_MEASUREMENTS];
+
+function saveMeasurementsStorage() {
+  localStorage.setItem('schoolMeasurements_v2', JSON.stringify(schoolMeasurements));
+}
 
 let aiLogs = [
   { prompt: 'O que é uma matriz de LEDs e como funciona?', resposta: 'A IA explicou o conceito de acionamento por linhas e colunas.', verificacao: 'Conferido no livro didático de robótica.', alteracao: 'Reescrito com palavras próprias e adicionado exemplo real.', id: 1 },
@@ -51,11 +62,9 @@ function readActiveTabContent() {
   const activeTab = document.querySelector('.tab-content.active');
   if (!activeTab) return;
 
-  const textToRead = activeTab.innerText;
-  const utterance = new SpeechSynthesisUtterance(textToRead);
+  const utterance = new SpeechSynthesisUtterance(activeTab.innerText);
   utterance.lang = 'pt-BR';
   utterance.rate = 1.0;
-
   synth.speak(utterance);
 }
 
@@ -72,7 +81,7 @@ function stopSpeech() {
   if (synth) synth.cancel();
 }
 
-// TROCA DE ABAS (FUNCIONA PARA TODAS AS ABAS, INCLUINDO A NOVA ABA)
+// TROCA DE ABAS
 function switchTab(tabId) {
   stopSpeech();
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -83,6 +92,26 @@ function switchTab(tabId) {
 
   if (targetContent) targetContent.classList.add('active');
   if (targetBtn) targetBtn.classList.add('active');
+}
+
+// FOTOS DOS PROJETOS (LINK OU ARQUIVO)
+function updatePhotoUrl(type) {
+  const input = document.getElementById(`link-${type}`);
+  const img = document.getElementById(`img-${type}`);
+  if (input && img && input.value.trim() !== '') {
+    img.src = input.value.trim();
+  }
+}
+
+function handleProjectFileUpload(event, type) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = document.getElementById(`img-${type}`);
+    if (img) img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
 }
 
 // SIMULADOR DE ONDA SONORA
@@ -167,7 +196,7 @@ function renderSchoolMeasurements() {
       <td class="p-3 font-bold ${item.db >= 80 ? 'text-red-400' : 'text-cyan-400'}">${item.db} dB</td>
       <td class="p-3 text-slate-300">${item.contexto}</td>
       <td class="p-3">
-        <button onclick="deleteSchoolMeasurementRow(${item.id})" class="text-red-400 hover:text-red-300 text-xs" title="Excluir medição">
+        <button type="button" onclick="deleteSchoolMeasurementRow(${item.id})" class="text-red-400 hover:text-red-300 text-xs" title="Excluir medição">
           <i class="fa-solid fa-trash"></i>
         </button>
       </td>
@@ -198,11 +227,19 @@ function addSchoolMeasurementRow() {
     db: db,
     contexto: contexto || 'Registro livre'
   });
+  saveMeasurementsStorage();
   renderSchoolMeasurements();
 }
 
 function deleteSchoolMeasurementRow(id) {
   schoolMeasurements = schoolMeasurements.filter(item => item.id !== id);
+  saveMeasurementsStorage();
+  renderSchoolMeasurements();
+}
+
+function resetSchoolMeasurements() {
+  localStorage.removeItem('schoolMeasurements_v2');
+  schoolMeasurements = [...DEFAULT_MEASUREMENTS];
   renderSchoolMeasurements();
 }
 
@@ -339,7 +376,7 @@ function renderAiLogs() {
       <td class="p-3 text-slate-400 text-xs">${item.verificacao}</td>
       <td class="p-3 text-emerald-400 text-xs">${item.alteracao}</td>
       <td class="p-3">
-        <button onclick="deleteAiLogRow(${item.id})" class="text-red-400 hover:text-red-300 text-xs" title="Excluir log">
+        <button type="button" onclick="deleteAiLogRow(${item.id})" class="text-red-400 hover:text-red-300 text-xs" title="Excluir log">
           <i class="fa-solid fa-trash"></i>
         </button>
       </td>
@@ -406,7 +443,7 @@ function removeUserImage() {
   if (input) input.value = '';
 }
 
-// INICIALIZAÇÃO SEGURA AO CARREGAR A PÁGINA
+// INICIALIZAÇÃO GERAL
 document.addEventListener('DOMContentLoaded', function() {
   initSoundSimulator();
   renderSchoolMeasurements();
