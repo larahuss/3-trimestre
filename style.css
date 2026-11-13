@@ -1,8 +1,9 @@
-/* Animações e Transições Personalizadas */
+/* Botões de Navegação das Abas */
 .tab-btn {
   background-color: rgba(30, 41, 59, 0.6);
   color: #94a3b8;
   border: 1px solid rgba(51, 65, 85, 0.5);
+  cursor: pointer;
 }
 
 .tab-btn:hover {
@@ -11,18 +12,19 @@
 }
 
 .tab-btn.active {
-  background-color: #0891b2;
-  color: #ffffff;
-  border-color: #22d3ee;
+  background-color: #0891b2 !important;
+  color: #ffffff !important;
+  border-color: #22d3ee !important;
   box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
 }
 
+/* Controle de Exibição das Abas */
 .tab-content {
-  display: none;
+  display: none !important;
 }
 
 .tab-content.active {
-  display: block;
+  display: block !important;
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -37,7 +39,7 @@
   }
 }
 
-/* Estilização da Grade de LEDs */
+/* Grade da Matriz de LEDs */
 .led-cell {
   width: 28px;
   height: 28px;
@@ -54,7 +56,7 @@
   border-color: #fca5a5;
 }
 
-/* MODO ALTO CONTRASTE */
+/* Modo Alto Contraste */
 body.high-contrast {
   background-color: #000000 !important;
   color: #ffffff !important;
@@ -67,6 +69,7 @@ body.high-contrast aside {
   border-color: #facc15 !important;
 }
 
+body.high-contrast section > div,
 body.high-contrast .bg-slate-800\/80,
 body.high-contrast .bg-slate-900\/60,
 body.high-contrast .bg-slate-900\/80,
@@ -84,7 +87,8 @@ body.high-contrast h4,
 body.high-contrast p,
 body.high-contrast span,
 body.high-contrast td,
-body.high-contrast th {
+body.high-contrast th,
+body.high-contrast label {
   color: #ffffff !important;
 }
 
@@ -92,7 +96,7 @@ body.high-contrast .text-cyan-400,
 body.high-contrast .text-indigo-400,
 body.high-contrast .text-emerald-400,
 body.high-contrast .text-amber-400 {
-  color: #facc15 !important; /* Amarelo de alto contraste */
+  color: #facc15 !important;
 }
 
 body.high-contrast .tab-btn {
@@ -108,7 +112,7 @@ body.high-contrast .tab-btn.active {
   border-color: #ffffff !important;
 }
 
-/* Scrollbar customizada */
+/* Barra de Rolagem */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
