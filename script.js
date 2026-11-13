@@ -13,12 +13,10 @@ let aiLogs = [
 ];
 
 let ledState = Array(64).fill(false);
-let currentFontSize = 100; // Porcentagem do tamanho da fonte
+let currentFontSize = 100;
 let synth = window.speechSynthesis;
 
 // FERRAMENTAS DE ACESSIBILIDADE
-
-// 1. Alterar Tamanho da Fonte
 function changeFontSize(delta) {
   currentFontSize += delta * 10;
   if (currentFontSize < 80) currentFontSize = 80;
@@ -31,30 +29,28 @@ function resetFontSize() {
   document.documentElement.style.fontSize = '100%';
 }
 
-// 2. Modo Alto Contraste
 function toggleHighContrast() {
   document.body.classList.toggle('high-contrast');
   const btn = document.getElementById('btn-contrast');
-  if (document.body.classList.contains('high-contrast')) {
-    btn.classList.add('bg-amber-400', 'text-black');
-  } else {
-    btn.classList.remove('bg-amber-400', 'text-black');
+  if (btn) {
+    if (document.body.classList.contains('high-contrast')) {
+      btn.classList.add('bg-amber-400', 'text-black');
+    } else {
+      btn.classList.remove('bg-amber-400', 'text-black');
+    }
   }
 }
 
-// 3. Leitor de Tela (Sintetizador de Voz)
 function readActiveTabContent() {
   if (!synth) {
-    alert('Desculpe, seu navegador não suporta leitura por voz.');
+    alert('Seu navegador não suporta leitura por voz.');
     return;
   }
-
-  synth.cancel(); // Para qualquer leitura em andamento
+  synth.cancel();
 
   const activeTab = document.querySelector('.tab-content.active');
   if (!activeTab) return;
 
-  // Extrai o texto visível da aba ativa
   const textToRead = activeTab.innerText;
   const utterance = new SpeechSynthesisUtterance(textToRead);
   utterance.lang = 'pt-BR';
@@ -76,10 +72,9 @@ function stopSpeech() {
   if (synth) synth.cancel();
 }
 
-
-// TROCA DE ABAS
+// TROCA DE ABAS (FUNCIONA PARA TODAS AS ABAS, INCLUINDO A NOVA ABA)
 function switchTab(tabId) {
-  stopSpeech(); // Para o leitor ao trocar de aba
+  stopSpeech();
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
@@ -101,39 +96,44 @@ function initSoundSimulator() {
     const freq = parseInt(freqSlider.value);
     const amp = parseInt(ampSlider.value);
 
-    document.getElementById('freq-val').innerText = `${freq} Hz`;
-    document.getElementById('amp-val').innerText = `${amp} dB`;
+    const freqValEl = document.getElementById('freq-val');
+    const ampValEl = document.getElementById('amp-val');
+    if (freqValEl) freqValEl.innerText = `${freq} Hz`;
+    if (ampValEl) ampValEl.innerText = `${amp} dB`;
 
     const path = document.getElementById('wave-path');
-    const width = 600;
-    const height = 150;
-    const midY = height / 2;
+    if (path) {
+      const width = 600;
+      const height = 150;
+      const midY = height / 2;
 
-    let d = `M 0 ${midY}`;
-    const cycles = freq / 80;
-    const amplitude = (amp / 120) * (height / 2 - 10);
+      let d = `M 0 ${midY}`;
+      const cycles = freq / 80;
+      const amplitude = (amp / 120) * (height / 2 - 10);
 
-    for (let x = 0; x <= width; x += 2) {
-      const y = midY + Math.sin((x / width) * cycles * Math.PI * 2) * amplitude;
-      d += ` L ${x} ${y}`;
+      for (let x = 0; x <= width; x += 2) {
+        const y = midY + Math.sin((x / width) * cycles * Math.PI * 2) * amplitude;
+        d += ` L ${x} ${y}`;
+      }
+      path.setAttribute('d', d);
     }
-    path.setAttribute('d', d);
 
-    // Diagnóstico
     const soundClass = document.getElementById('sound-class');
     const soundImpact = document.getElementById('sound-impact');
-    if (amp < 55) {
-      soundClass.innerText = 'Som Confortável / Baixo';
-      soundClass.className = 'text-emerald-400 font-bold';
-      soundImpact.innerText = 'Excelente para concentração e aprendizagem.';
-    } else if (amp < 80) {
-      soundClass.innerText = 'Som Moderado';
-      soundClass.className = 'text-cyan-400 font-bold';
-      soundImpact.innerText = 'Pode gerar leve fadiga após longos períodos.';
-    } else {
-      soundClass.innerText = 'Alerta de Ruído Elevado';
-      soundClass.className = 'text-red-400 font-bold';
-      soundImpact.innerText = 'Risco de estresse e desconforto sensorial.';
+    if (soundClass && soundImpact) {
+      if (amp < 55) {
+        soundClass.innerText = 'Som Confortável / Baixo';
+        soundClass.className = 'text-emerald-400 font-bold';
+        soundImpact.innerText = 'Excelente para concentração e aprendizagem.';
+      } else if (amp < 80) {
+        soundClass.innerText = 'Som Moderado';
+        soundClass.className = 'text-cyan-400 font-bold';
+        soundImpact.innerText = 'Pode gerar leve fadiga após longos períodos.';
+      } else {
+        soundClass.innerText = 'Alerta de Ruído Elevado';
+        soundClass.className = 'text-red-400 font-bold';
+        soundImpact.innerText = 'Risco de estresse e desconforto sensorial.';
+      }
     }
   }
 
@@ -142,7 +142,7 @@ function initSoundSimulator() {
   updateWave();
 }
 
-// TABELA DE MEDIÇÕES
+// TABELA DE MEDIÇÕES DA ESCOLA
 function renderSchoolMeasurements() {
   const tbody = document.getElementById('school-measurements-body');
   if (!tbody) return;
@@ -176,9 +176,13 @@ function renderSchoolMeasurements() {
   });
 
   const avg = schoolMeasurements.length ? (sumDb / schoolMeasurements.length).toFixed(1) : 0;
-  document.getElementById('avg-db').innerText = `${avg} dB`;
-  document.getElementById('max-db-loc').innerText = `${maxLoc} (${maxDb > -1 ? maxDb : 0} dB)`;
-  document.getElementById('min-db-loc').innerText = `${minLoc} (${minDb < 999 ? minDb : 0} dB)`;
+  const avgEl = document.getElementById('avg-db');
+  const maxEl = document.getElementById('max-db-loc');
+  const minEl = document.getElementById('min-db-loc');
+
+  if (avgEl) avgEl.innerText = `${avg} dB`;
+  if (maxEl) maxEl.innerText = `${maxLoc} (${maxDb > -1 ? maxDb : 0} dB)`;
+  if (minEl) minEl.innerText = `${minLoc} (${minDb < 999 ? minDb : 0} dB)`;
 }
 
 function addSchoolMeasurementRow() {
@@ -250,10 +254,12 @@ function generateArduinoMatrixCode() {
 
 // CÓDIGO MORSE
 function playMorseCode() {
-  const input = document.getElementById('morse-input').value.toUpperCase();
+  const inputEl = document.getElementById('morse-input');
   const led = document.getElementById('morse-led');
   const signalText = document.getElementById('morse-signal-text');
+  if (!inputEl || !led || !signalText) return;
 
+  const input = inputEl.value.toUpperCase();
   const morseMap = {
     'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
     'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
@@ -265,7 +271,10 @@ function playMorseCode() {
   let morseSeq = input.split('').map(char => morseMap[char] || '').join(' ');
   signalText.innerText = morseSeq || '... --- ...';
 
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return;
+
+  const audioCtx = new AudioContextClass();
   let time = audioCtx.currentTime;
 
   morseSeq.split('').forEach(symbol => {
@@ -306,11 +315,13 @@ function triggerVisualLed(element, startTime, durationMs) {
 
 // DISPLAY LCD
 function updateLcdDisplay() {
-  const line1 = document.getElementById('lcd-input-1').value;
-  const line2 = document.getElementById('lcd-input-2').value;
+  const in1 = document.getElementById('lcd-input-1');
+  const in2 = document.getElementById('lcd-input-2');
+  const out1 = document.getElementById('lcd-line-1');
+  const out2 = document.getElementById('lcd-line-2');
 
-  document.getElementById('lcd-line-1').innerText = (line1 + '                ').substring(0, 16);
-  document.getElementById('lcd-line-2').innerText = (line2 + '                ').substring(0, 16);
+  if (in1 && out1) out1.innerText = (in1.value + '                ').substring(0, 16);
+  if (in2 && out2) out2.innerText = (in2.value + '                ').substring(0, 16);
 }
 
 // AUDITORIA DE IA
@@ -369,10 +380,12 @@ function handleImageUpload(event) {
       const textGroup = document.getElementById('placeholder-text-group');
       const removeBtn = document.getElementById('btn-remove-img');
 
-      img.src = e.target.result;
-      img.classList.remove('hidden');
-      textGroup.classList.add('hidden');
-      removeBtn.classList.remove('hidden');
+      if (img) {
+        img.src = e.target.result;
+        img.classList.remove('hidden');
+      }
+      if (textGroup) textGroup.classList.add('hidden');
+      if (removeBtn) removeBtn.classList.remove('hidden');
     };
     reader.readAsDataURL(file);
   }
@@ -384,18 +397,20 @@ function removeUserImage() {
   const removeBtn = document.getElementById('btn-remove-img');
   const input = document.getElementById('user-photo-input');
 
-  img.src = '';
-  img.classList.add('hidden');
-  textGroup.classList.remove('hidden');
-  removeBtn.classList.add('hidden');
-  input.value = '';
+  if (img) {
+    img.src = '';
+    img.classList.add('hidden');
+  }
+  if (textGroup) textGroup.classList.remove('hidden');
+  if (removeBtn) removeBtn.classList.add('hidden');
+  if (input) input.value = '';
 }
 
-// INICIALIZAÇÃO GERAL
-window.onload = function() {
+// INICIALIZAÇÃO SEGURA AO CARREGAR A PÁGINA
+document.addEventListener('DOMContentLoaded', function() {
   initSoundSimulator();
   renderSchoolMeasurements();
   initLedGrid();
   updateLcdDisplay();
   renderAiLogs();
-};
+});
