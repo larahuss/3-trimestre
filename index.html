@@ -3,328 +3,289 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ciência do Som, Robótica e Acessibilidade</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://tailwindcss.com"></script>
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cloudflare.com">
-  <!-- CSS Customizado -->
+  <title>Projeto Integrador — Acessibilidade e Qualidade de Vida</title>
+  <!-- Conecta o arquivo CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col transition-all duration-200">
+<body>
 
-  <!-- BARRA DE ACESSIBILIDADE FIXA -->
-  <aside aria-label="Ferramentas de Acessibilidade" class="bg-slate-950 border-b border-slate-800 text-slate-300 py-2 px-4 sticky top-0 z-50 shadow-md">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2 text-xs">
-      
-      <!-- Ajuste de Fonte e Contraste -->
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="font-semibold text-slate-400 flex items-center gap-1">
-          <i class="fa-solid fa-universal-access text-cyan-400"></i> Acessibilidade:
-        </span>
-        <button onclick="changeFontSize(1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Aumentar Fonte">
-          <i class="fa-solid fa-font"></i> A+
-        </button>
-        <button onclick="changeFontSize(-1)" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 flex items-center gap-1" title="Diminuir Fonte">
-          <i class="fa-solid fa-font"></i> A-
-        </button>
-        <button onclick="resetFontSize()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Tamanho Padrão">
-          A (Normal)
-        </button>
-        <button onclick="toggleHighContrast()" id="btn-contrast" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 rounded border border-amber-500/40 font-medium flex items-center gap-1">
-          <i class="fa-solid fa-circle-half-stroke"></i> Alto Contraste
-        </button>
-      </div>
-
-      <!-- Leitor de Tela (Voz) -->
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="font-semibold text-slate-400 flex items-center gap-1">
-          <i class="fa-solid fa-volume-high text-indigo-400"></i> Leitor de Voz:
-        </span>
-        <button onclick="readActiveTabContent()" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-medium flex items-center gap-1">
-          <i class="fa-solid fa-play"></i> Ler Conteúdo
-        </button>
-        <button onclick="pauseSpeech()" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded border border-slate-700" title="Pausar / Retomar Voz">
-          <i class="fa-solid fa-pause"></i> Pausar
-        </button>
-        <button onclick="stopSpeech()" class="px-2 py-1 bg-red-900/50 hover:bg-red-800/50 text-red-300 rounded border border-red-700" title="Parar Leitura">
-          <i class="fa-solid fa-stop"></i> Parar
-        </button>
-      </div>
-
+  <!-- Barra de Acessibilidade -->
+  <div class="barra-acessibilidade">
+    <span><strong>Projeto Integrador • 3º Trimestre</strong></span>
+    <div>
+      <button onclick="alterarFonte(2)">A+ Aumentar Letra</button>
+      <button onclick="alterarFonte(-2)">A- Diminuir Letra</button>
+      <button onclick="alternarContraste()">🌓 Alto Contraste</button>
     </div>
-  </aside>
+  </div>
 
-  <!-- Header -->
-  <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-      <div class="flex items-center gap-3">
-        <div class="bg-gradient-to-tr from-cyan-500 to-indigo-500 p-2.5 rounded-xl shadow-md text-white">
-          <i class="fa-solid fa-microchip text-2xl"></i>
-        </div>
-        <div>
-          <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
-            Projeto Integrador: Tecnologia & Acessibilidade
-          </h1>
-          <p class="text-xs text-slate-400">Física, Tecnociência e Robótica — 2ºC & 3º Trimestre</p>
-        </div>
-      </div>
-
-      <!-- Abas de Navegação -->
-      <nav class="flex flex-wrap gap-1.5 justify-center">
-        <button onclick="switchTab('fisica')" id="btn-tab-fisica" class="tab-btn active px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-wave-square"></i> Física do Som
-        </button>
-        <button onclick="switchTab('robotica-apresentacao')" id="btn-tab-robotica-apresentacao" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-book-open"></i> Apresentação
-        </button>
-        <button onclick="switchTab('robotica-matriz')" id="btn-tab-robotica-matriz" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-border-all"></i> Matriz de LEDs
-        </button>
-        <button onclick="switchTab('robotica-morse')" id="btn-tab-robotica-morse" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-signal"></i> Código Morse
-        </button>
-        <button onclick="switchTab('robotica-display')" id="btn-tab-robotica-display" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-tv"></i> Display LCD
-        </button>
-        <button onclick="switchTab('robotica-comparacao')" id="btn-tab-robotica-comparacao" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-table"></i> Comparação
-        </button>
-        <button onclick="switchTab('robotica-caso')" id="btn-tab-robotica-caso" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-users-viewfinder"></i> Estudo de Caso
-        </button>
-        <button onclick="switchTab('robotica-ia')" id="btn-tab-robotica-ia" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-robot"></i> Auditoria de IA
-        </button>
-        <button onclick="switchTab('novo-projeto')" id="btn-tab-novo-projeto" class="tab-btn border border-dashed border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/10 px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-plus-circle text-cyan-400"></i> Módulo Adicional
-        </button>
-        <button onclick="switchTab('cofre-digital')" id="btn-tab-cofre-digital" class="tab-btn px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
-          <i class="fa-solid fa-lock text-emerald-400"></i> Cofre Digital
-        </button>
-      </nav>
-    </div>
+  <!-- Cabeçalho -->
+  <header>
+    <h1>Tecnologia, Comunicação e Acessibilidade</h1>
+    <p>Como a ciência, a robótica e a segurança digital podem contribuir para a melhoria da qualidade de vida das pessoas.</p>
   </header>
 
-  <!-- Conteúdo Principal -->
-  <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+  <!-- Menu de Navegação -->
+  <nav>
+    <button class="tab-btn active" onclick="abrirAba('robotica', this)">🤖 Robótica: Comunicação</button>
+    <button class="tab-btn" onclick="abrirAba('fisica', this)">🔊 Física: Ciência do Som</button>
+    <button class="tab-btn" onclick="abrirAba('cofre', this)">🔐 Cofre Digital Seguro</button>
+    <button class="tab-btn" onclick="abrirAba('ia-fontes', this)">🧠 Uso de IA & Créditos</button>
+  </nav>
 
-    <!-- ABA 1: FÍSICA E TECNOCIÊNCIA -->
-    <section id="tab-fisica" class="tab-content active space-y-6">
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Projeto de Física</span>
-          <h2 class="text-2xl font-bold">Ciência do Som: Audição, Acessibilidade e Qualidade de Vida</h2>
+  <main>
+    <!-- ABA 1: ROBÓTICA -->
+    <section id="robotica" class="secao active">
+      <div class="card">
+        <h2>Parte A — Apresentação do Tema</h2>
+        <div class="destaque-box">
+          <strong>Questão Motriz:</strong> Como a ciência, a tecnologia e as ferramentas de Inteligência Artificial podem contribuir para a melhoria da qualidade de vida das pessoas?
         </div>
-        <p class="text-slate-300 leading-relaxed">
-          Este módulo investiga os fundamentos da acústica, a medição do nível sonoro na escola e como o ruído afeta a saúde, a concentração e a inclusão de pessoas com hipersensibilidade auditiva.
-        </p>
-      </div>
-
-      <!-- Simulador de Onda Sonora -->
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
-        <h3 class="text-lg font-semibold flex items-center gap-2 text-cyan-400">
-          <i class="fa-solid fa-sliders"></i> Simulador Interativo de Ondas Sonoras
-        </h3>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div class="space-y-4 bg-slate-900/60 p-4 rounded-xl border border-slate-700">
-            <div>
-              <label class="text-sm font-medium text-slate-300 flex justify-between">
-                <span>Frequência (Grave vs Agudo):</span>
-                <span id="freq-val" class="text-cyan-400 font-bold">440 Hz</span>
-              </label>
-              <input type="range" id="freq-slider" min="100" max="1000" value="440" class="w-full mt-2 accent-cyan-400">
-            </div>
-            <div>
-              <label class="text-sm font-medium text-slate-300 flex justify-between">
-                <span>Intensidade (Fraco vs Forte):</span>
-                <span id="amp-val" class="text-indigo-400 font-bold">60 dB</span>
-              </label>
-              <input type="range" id="amp-slider" min="20" max="120" value="60" class="w-full mt-2 accent-indigo-400">
-            </div>
-            <div class="p-3 bg-slate-800 rounded-lg text-xs space-y-1 text-slate-300">
-              <p><strong>Diagnóstico:</strong> <span id="sound-class" class="text-cyan-300">Som Médio / Confortável</span></p>
-              <p><strong>Impacto:</strong> <span id="sound-impact">Ideal para ambientes de aprendizado e trabalho.</span></p>
-            </div>
-          </div>
-          <div class="lg:col-span-2 bg-slate-950 p-4 rounded-xl border border-slate-700 flex flex-col justify-center items-center">
-            <svg id="wave-svg" class="w-full h-40" viewBox="0 0 600 150">
-              <path id="wave-path" d="" fill="none" stroke="#22d3ee" stroke-width="3"/>
-            </svg>
-            <div class="flex justify-between w-full text-xs text-slate-400 mt-2 px-2">
-              <span>Baixa Amplitude (Som Fraco)</span>
-              <span>Alta Frequência (Som Agudo)</span>
-            </div>
-          </div>
+        <p><strong>Acessibilidade:</strong> É garantir que qualquer pessoa, independentemente de suas limitações físicas, sensoriais ou cognitivas, consiga usar espaços, serviços e informações com autonomia e segurança.</p>
+        <p><strong>Comunicação e Qualidade de Vida:</strong> Comunicar-se é uma necessidade básica. Quando um ambiente não oferece meios alternativos para transmitir avisos ou pedidos de ajuda, cria-se uma barreira de exclusão. A tecnologia reduz essas barreiras ao traduzir informações em luzes, sons ou textos claros.</p>
+        <div class="placeholder-grupo">
+          <strong>[Preencher pelo grupo]:</strong> Descrevam aqui a situação concreta escolhida pelo grupo (ex: uma pessoa com deficiência auditiva em uma estação de trem ou um paciente sem fala em um hospital) e os nomes dos integrantes do grupo.
         </div>
       </div>
 
-      <!-- Tabela de Medições da Escola -->
-    <!-- ABA 6: TABELA COMPARATIVA -->
-    <section id="tab-robotica-comparacao" class="tab-content space-y-6">
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
-        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte E</span>
-        <h2 class="text-2xl font-bold">Tabela Comparativa dos Recursos</h2>
+      <div class="card">
+        <h2>Parte B — Matriz de LEDs</h2>
+        <p><strong>O que é e como funciona:</strong> Uma matriz de LEDs é uma grade organizada em linhas e colunas de pequenos diodos emissores de luz. Ao acender pontos específicos de forma coordenada, o microcontrolador forma ícones, setas, letras ou expressões faciais.</p>
+        <p><strong>Aplicação na acessibilidade:</strong> Pode exibir símbolos universais como setas de direção, rostos indicando emoções (alegria, dor, tristeza) ou alertas visuais de perigo para pessoas surdas ou em locais muito barulhentos.</p>
+        <p><strong>Vantagens e limitações:</strong> Possui alto brilho e leitura rápida sem depender de idiomas complexos. Porém, tem baixa resolução para textos longos, perde visibilidade sob luz solar direta e exige que o usuário conheça o significado do símbolo.</p>
+        <div class="placeholder-grupo">
+          <strong>[Inserir Print do Tinkercad]:</strong> Coloquem aqui a captura de tela do circuito com Matriz de LEDs e expliquem qual símbolo ele está comunicando.
+        </div>
+      </div>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-sm text-slate-300 border-collapse">
-            <thead class="bg-slate-900/80 text-slate-400 text-xs uppercase border-b border-slate-700">
+      <div class="card">
+        <h2>Parte C — Código Morse</h2>
+        <p><strong>O que é e como funciona:</strong> É um sistema de comunicação que representa letras e números por meio da combinação de sinais curtos (pontos <code>.</code>) e longos (traços <code>-</code>). Em circuitos robóticos, um botão permite que o usuário envie os pulsos, enquanto um LED e um <em>buzzer</em> emitem sinais luminosos e sonoros simultaneamente.</p>
+        <p><strong>Exemplo prático:</strong> O pedido internacional de socorro <strong>SOS</strong> é representado por <code>... --- ...</code> (três sinais curtos, três longos e três curtos).</p>
+        <p><strong>Vantagens e limitações:</strong> Permite comunicação mesmo com recursos mínimos (apenas um botão para pessoas com mobilidade muito reduzida). Contudo, exige que quem recebe saiba decodificar a mensagem ou tenha um sistema que a traduza automaticamente.</p>
+        <div class="placeholder-grupo">
+          <strong>[Inserir Print do Tinkercad]:</strong> Coloquem aqui a imagem do circuito com botão, LED e buzzer e expliquem como o sinal é acionado.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Parte D — Display (LCD / OLED)</h2>
+        <p><strong>O que é e como funciona:</strong> É uma tela eletrônica capaz de exibir caracteres alfanuméricos, números e mensagens curtas de forma detalhada.</p>
+        <p><strong>Exemplo de mensagem acessível:</strong> <code>"ATENCAO: ALARME DE INCENDIO - DIRIJA-SE A SAIDA"</code> ou <code>"SENHA 042 - GUICHE 03"</code>.</p>
+        <p><strong>Vantagens e limitações:</strong> Transmite informações precisas e completas. Porém, sozinho não garante acessibilidade total: não atende pessoas cegas (sem leitor de tela ou áudio), pessoas não alfabetizadas ou falantes de outros idiomas, além de depender do tamanho da fonte e do contraste.</p>
+        <div class="placeholder-grupo">
+          <strong>[Inserir Print do Tinkercad]:</strong> Coloquem aqui a captura de tela do display exibindo a mensagem criada pelo grupo.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Parte E — Comparação dos Três Recursos</h2>
+        <div class="tabela-responsiva">
+          <table>
+            <thead>
               <tr>
-                <th class="p-3">Recurso</th>
-                <th class="p-3">O que comunica?</th>
-                <th class="p-3">Tipo de Sinal</th>
-                <th class="p-3">Possível Aplicação</th>
-                <th class="p-3">Limitações e Adaptações</th>
+                <th>Recurso</th>
+                <th>O que comunica?</th>
+                <th>Tipo de sinal</th>
+                <th>Possível aplicação</th>
+                <th>Limitações e adaptações</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-700/50 text-xs">
-              <tr class="hover:bg-slate-700/20">
-                <td class="p-3 font-bold text-cyan-400">Matriz de LEDs</td>
-                <td class="p-3">Símbolos, ícones, direções e emoções.</td>
-                <td class="p-3">Visual (Luminoso)</td>
-                <td class="p-3">Sinalização de rotas e alertas em locais barulhentos.</td>
-                <td class="p-3">Baixa resolução. Exige interpretação prévia do ícone.</td>
+            <tbody>
+              <tr>
+                <td><strong>Matriz de LEDs</strong></td>
+                <td>Ícones, setas, expressões e alertas simples.</td>
+                <td>Visual (luminoso).</td>
+                <td>Sinalização de emergência, comunicação de emoções/necessidades básicas.</td>
+                <td>Pouco espaço para texto; requer alto contraste e legenda clara.</td>
               </tr>
-              <tr class="hover:bg-slate-700/20">
-                <td class="p-3 font-bold text-amber-400">Código Morse</td>
-                <td class="p-3">Letras e mensagens codificadas em pulsos.</td>
-                <td class="p-3">Sonoro ou Visual</td>
-                <td class="p-3">Pedir socorro e chamadas de emergência com acionador simples.</td>
-                <td class="p-3">Requer conhecimento do código pelo emissor e receptor.</td>
+              <tr>
+                <td><strong>Código Morse</strong></td>
+                <td>Letras e números codificados em pulsos curtos e longos.</td>
+                <td>Sonoro (buzzer), visual (LED) ou tátil (vibração).</td>
+                <td>Pedidos de ajuda por pessoas com movimentos limitados (uso de 1 botão).</td>
+                <td>Exige decodificação; adaptar com conversor automático para texto/voz.</td>
               </tr>
-              <tr class="hover:bg-slate-700/20">
-                <td class="p-3 font-bold text-emerald-400">Display LCD</td>
-                <td class="p-3">Textos alfa-numéricos estruturados.</td>
-                <td class="p-3">Visual (Texto)</td>
-                <td class="p-3">Painéis de senha, instrução de uso e guichês.</td>
-                <td class="p-3">Não atende pessoas cegas sem síntese de voz acoplada.</td>
+              <tr>
+                <td><strong>Display</strong></td>
+                <td>Frases curtas, dados, senhas e instruções detalhadas.</td>
+                <td>Visual (textual/numérico).</td>
+                <td>Painéis de atendimento, orientação em espaços públicos e avisos claros.</td>
+                <td>Inacessível para cegos; adaptar com áudio simultâneo e letras grandes.</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-    </section>
 
-    <!-- ABA 7: ESTUDO DE CASO -->
-    <section id="tab-robotica-caso" class="tab-content space-y-6">
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
-        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte F</span>
-        <h2 class="text-2xl font-bold">Análise de Situação Concreta</h2>
-        
-        <div class="p-4 bg-slate-900/80 rounded-xl border border-slate-700 space-y-3">
-          <h3 class="font-bold text-cyan-400 text-base">Cenário: Sala de Espera de um Hospital Ruidoso</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Em uma sala de espera cheia de um hospital, pessoas com deficiência auditiva não escutam o alto-falante chamando seus nomes, enquanto autistas com hipersensibilidade sofrem com o ruído ambiente.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-            <div class="p-3 bg-slate-800 rounded border border-slate-700 text-xs space-y-1">
-              <strong class="text-cyan-400 block">Matriz de LEDs:</strong>
-              Exibe uma seta indicando qual sala está aberta no momento.
-            </div>
-            <div class="p-3 bg-slate-800 rounded border border-slate-700 text-xs space-y-1">
-              <strong class="text-amber-400 block">Código Morse:</strong>
-              Emite um aviso suave e silencioso (pulsos de luz no teto) para alerta geral.
-            </div>
-            <div class="p-3 bg-slate-800 rounded border border-slate-700 text-xs space-y-1">
-              <strong class="text-emerald-400 block">Display LCD:</strong>
-              Mostra o nome do paciente e a sala exata em texto legível.
-            </div>
-          </div>
-        </div>
+      <div class="card">
+        <h2>Partes F, H e I — Análise Crítica, Proposta de Melhoria e Conclusão</h2>
+        <p><strong>Relação com a Qualidade de Vida (Parte F):</strong> Em um ambiente hospitalar ou escolar movimentado, a combinação desses recursos evita o isolamento. Enquanto o display orienta com detalhes, a matriz de LEDs chama a atenção rapidamente e o Morse permite que alguém acione um alerta com um único toque.</p>
+        <p><strong>Proposta de Melhoria (Parte H):</strong> Criar um sistema integrado onde o acionamento de um botão em Código Morse envie automaticamente uma mensagem traduzida para um Display grande e acenda um ícone de alerta na Matriz de LEDs, acompanhado de aviso sonoro. Isso elimina a barreira de o atendente não saber ler Morse e atende tanto pessoas surdas quanto cegas. A verificação seria feita testando o tempo de resposta e compreensão com colegas simulando diferentes restrições.</p>
+        <p><strong>Conclusão (Parte I):</strong> Nenhuma tecnologia isolada resolve todas as barreiras de comunicação. A verdadeira inclusão acontece quando combinamos recursos visuais, sonoros e táteis pensando na diversidade real das pessoas.</p>
       </div>
     </section>
 
-    <!-- ABA 8: AUDITORIA DE IA -->
-    <section id="tab-robotica-ia" class="tab-content space-y-6">
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Parte G</span>
-            <h2 class="text-2xl font-bold">Uso Responsável e Auditoria de IA</h2>
-          </div>
-          <button onclick="addAiAuditRow()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-3 py-2 rounded-lg transition flex items-center gap-1.5">
-            <i class="fa-solid fa-plus"></i> Adicionar Registro
-          </button>
-        </div>
+    <!-- ABA 2: FÍSICA E TECNOCIÊNCIA -->
+    <section id="fisica" class="secao">
+      <div class="card">
+        <h2>Ciência do Som: Audição, Acessibilidade e Qualidade de Vida</h2>
+        <p><strong>O que é o som:</strong> É uma onda mecânica longitudinal que precisa de um meio material (como o ar) para se propagar por meio de compressões e rarefações.</p>
+        <ul>
+          <li><strong>Frequência (Hz):</strong> Define se o som é <em>grave</em> (baixa frequência) ou <em>agudo</em> (alta frequência). O ouvido humano típico capta entre <strong>20 Hz e 20.000 Hz</strong>.</li>
+          <li><strong>Intensidade e Nível Sonoro (dB):</strong> Define se o som é <em>fraco</em> ou <em>forte</em>. Medido em decibéis (dB), representa a energia transportada pela onda sonora.</li>
+        </ul>
+        <p><strong>Impactos na Saúde e Acessibilidade:</strong> A exposição prolongada a ruídos acima de 80–85 dB pode causar fadiga auditiva e perda permanente da audição. Além disso, ambientes barulhentos geram estresse, dificuldade de concentração e sobrecarga sensorial, especialmente para pessoas com hipersensibilidade auditiva (como muitas pessoas autistas).</p>
+      </div>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-sm text-slate-300">
-            <thead class="bg-slate-900/80 text-slate-400 text-xs uppercase border-b border-slate-700">
+      <div class="card">
+        <h2>Investigação na Escola — Medições com Decibelímetro</h2>
+        <p><em>Nota metodológica: Aplicativos de celular fornecem estimativas comparativas que variam conforme o microfone do aparelho e não substituem decibelímetros profissionais calibrados.</em></p>
+        <div class="tabela-responsiva">
+          <table>
+            <thead>
               <tr>
-                <th class="p-3">Ferramenta IA</th>
-                <th class="p-3">Solicitação</th>
-                <th class="p-3">Validação / Ajustes</th>
-                <th class="p-3">Ações</th>
+                <th>Local</th>
+                <th>Data / Horário</th>
+                <th>Valor Médio (dB)</th>
+                <th>O que estava acontecendo?</th>
+                <th>Observações</th>
               </tr>
             </thead>
-            <tbody id="ai-logs-body" class="divide-y divide-slate-700/50">
-              <!-- Linhas preenchidas pelo JS -->
+            <tbody>
+              <tr>
+                <td>Biblioteca</td>
+                <td>[Preencher]</td>
+                <td>[Ex: 42 dB]</td>
+                <td>Estudantes lendo em silêncio</td>
+                <td>Ambiente acusticamente confortável</td>
+              </tr>
+              <tr>
+                <td>Sala de Aula</td>
+                <td>[Preencher]</td>
+                <td>[Ex: 65 dB]</td>
+                <td>Explicação da professora / conversas</td>
+                <td>Varia conforme atividade em grupo</td>
+              </tr>
+              <tr>
+                <td>Corredor</td>
+                <td>[Preencher]</td>
+                <td>[Ex: 74 dB]</td>
+                <td>Troca de aulas</td>
+                <td>Eco devido às paredes lisas</td>
+              </tr>
+              <tr>
+                <td>Pátio / Refeitório</td>
+                <td>[Preencher]</td>
+                <td>[Ex: 86 dB]</td>
+                <td>Intervalo / Recreio</td>
+                <td>Pico de ruído; difícil conversar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="placeholder-grupo">
+          <strong>[Análise do Grupo]:</strong> Respondam aqui qual local teve maior e menor valor em dB e expliquem como a movimentação e a arquitetura influenciaram os resultados.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Propostas de Melhoria Acústica e Inclusão na Escola</h2>
+        <ol>
+          <li><strong>Criação de uma "Zona Calma" (Espaço de Regulação Sensorial):</strong> Disponibilizar uma sala ou canto da biblioteca com isolamento básico para estudantes com hipersensibilidade auditiva descansarem durante intervalos barulhentos.</li>
+          <li><strong>Sinalização Visual nos Corredores e Pátio:</strong> Instalar painéis luminosos (como matrizes de LED) que indiquem o início/término das aulas ou alertas sonoros excessivos, reduzindo a dependência de sirenes estridentes.</li>
+          <li><strong>Barreiras de Absorção Sonora:</strong> Uso de painéis de cortiça, murais de tecido ou borrachas nos pés das cadeiras das salas de aula para diminuir a reverberação (eco).</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ABA 3: COFRE DIGITAL SEGURO -->
+    <section id="cofre" class="secao">
+      <div class="card">
+        <h2>🔐 Cofre Digital Seguro e Acessível</h2>
+        <p>Esta ferramenta aplica conceitos de acessibilidade visual (fontes ampliadas, alto contraste e botões claros) aliados à <strong>criptografia SHA-256</strong> no navegador para proteger senhas e educar usuários contra golpes digitais.</p>
+
+        <div class="aviso-golpes">
+          <strong>🛡️ Dicas de Ouro Contra Golpes na Internet:</strong>
+          <ul>
+            <li><strong>Ninguém do banco pede sua senha:</strong> Gerentes nunca ligam pedindo senhas, códigos por SMS ou transferências de teste.</li>
+            <li><strong>Desconfie de urgência:</strong> Golpistas dizem que sua conta será bloqueada hoje para fazer você agir sem pensar.</li>
+            <li><strong>Anote sua Senha Mestra no papel:</strong> Guarde-a em local seguro em casa. Sem ela, o cofre não pode ser aberto.</li>
+          </ul>
+        </div>
+
+        <div class="campo-grupo">
+          <label for="senhaMestra">1. Digite sua Senha Mestra (a chave do cofre):</label>
+          <div class="senha-wrapper">
+            <input type="password" id="senhaMestra" placeholder="Ex: CasaAzul2026!">
+            <button type="button" class="btn-acao btn-cinza" onclick="alternarSenha()">👁️ Mostrar</button>
+          </div>
+        </div>
+
+        <div class="campo-grupo">
+          <label for="dadosSecretos">2. Escreva o que deseja guardar em segredo:</label>
+          <textarea id="dadosSecretos" rows="3" placeholder="Ex: Senha do Wi-Fi: familia123&#10;E-mail escolar: aluno@escola.br"></textarea>
+        </div>
+
+        <div class="grupo-botoes">
+          <button class="btn-acao btn-verde" onclick="salvarCofreWeb()">🔒 Trancar e Salvar</button>
+          <button class="btn-acao btn-azul" onclick="abrirCofreWeb()">🔓 Abrir Cofre</button>
+          <button class="btn-acao btn-cinza" onclick="limparCofreWeb()">🧹 Limpar Tela</button>
+        </div>
+
+        <div id="resultadoCofre" class="caixa-resultado">O cofre está fechado. Digite sua senha para salvar ou ler seus dados.</div>
+      </div>
+    </section>
+
+    <!-- ABA 4: USO RESPONSÁVEL DE IA & FONTES -->
+    <section id="ia-fontes" class="secao">
+      <div class="card">
+        <h2>Parte G — Registro Obrigatório do Uso de Inteligência Artificial</h2>
+        <p>Em conformidade com as orientações do Projeto Integrador, registramos abaixo como utilizamos a IA como ferramenta de apoio à pesquisa e estruturação do site, mantendo a revisão crítica e a autoria do grupo:</p>
+        <div class="tabela-responsiva">
+          <table>
+            <thead>
+              <tr>
+                <th>Pergunta (Prompt) feita à IA</th>
+                <th>O que a IA respondeu?</th>
+                <th>Como verificamos?</th>
+                <th>O que mantivemos ou alteramos?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>"Como criar um site acessível reunindo os roteiros de Robótica, Física e o Cofre Digital?"</td>
+                <td>Gerou a estrutura HTML/CSS/JS com botões de alto contraste, ajuste de fonte e abas temáticas.</td>
+                <td>Testamos o arquivo no navegador e conferimos se todos os tópicos dos roteiros estavam presentes.</td>
+                <td>Mantivemos o layout acessível e adaptamos os textos e dados das medições para a realidade da nossa escola.</td>
+              </tr>
+              <tr>
+                <td>[Inserir 2º prompt feito pelo grupo]</td>
+                <td>[Resumo da resposta da IA]</td>
+                <td>[Ex: Conferimos no livro de Física / Tinkercad]</td>
+                <td>[O que o grupo reescreveu ou corrigiu]</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
-    </section>
 
-    <!-- ABA 9: MÓDULO ADICIONAL (RESERVADO) -->
-    <section id="tab-novo-projeto" class="tab-content space-y-6">
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-700 pb-4">
-          <div>
-            <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Espaço Reservado</span>
-            <h2 class="text-2xl font-bold text-slate-100 mt-1">[ Título do Projeto do Novo Professor ]</h2>
-            <p class="text-xs text-slate-400">Estrutura preparada para receber as novas instruções e conteúdos da professora.</p>
-          </div>
-          <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5">
-            <i class="fa-solid fa-hourglass-half"></i> Aguardando Material
-          </span>
-        </div>
-
-        <!-- Área de Upload e Preview de Imagem -->
-        <div class="bg-slate-900/60 p-6 rounded-xl border-2 border-dashed border-slate-700 flex flex-col items-center justify-center space-y-4">
-          <div id="image-placeholder-zone" class="w-full max-w-md h-48 bg-slate-950 rounded-lg border border-slate-800 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
-            <img id="preview-user-img" src="" alt="Pré-visualização da Imagem" class="hidden absolute inset-0 w-full h-full object-cover">
-            <div id="placeholder-text-group" class="space-y-2">
-              <i class="fa-solid fa-image text-4xl text-slate-600"></i>
-              <p class="text-xs text-slate-400 font-semibold">[ Sua foto / imagem aqui ]</p>
-              <p class="text-[10px] text-slate-500">Envie um arquivo para testar a visualização na moldura</p>
-            </div>
-          </div>
-          
-          <div class="flex items-center gap-3">
-            <input type="file" id="user-photo-input" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
-            <button onclick="document.getElementById('user-photo-input').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white text-xs px-4 py-2 rounded-lg font-medium transition flex items-center gap-2">
-              <i class="fa-solid fa-upload"></i> Carregar Foto
-            </button>
-            <button onclick="removeUserImage()" id="btn-remove-img" class="hidden bg-red-900/40 hover:bg-red-800/60 text-red-300 text-xs px-3 py-2 rounded-lg transition">
-              Remover Foto
-            </button>
-          </div>
-        </div>
-
-        <!-- Blocos de Texto Placeholder -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-700/60 space-y-2">
-            <h3 class="font-semibold text-cyan-400 text-sm">[ Insira o Título da Seção 1 ]</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              [ Insira o texto da professora aqui. Este espaço já está formatado com as cores e o estilo das outras abas para manter o padrão do site. ]
-            </p>
-          </div>
-          <div class="p-4 bg-slate-900/40 rounded-xl border border-slate-700/60 space-y-2">
-            <h3 class="font-semibold text-indigo-400 text-sm">[ Insira o Título da Seção 2 ]</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              [ Insira o texto da professora aqui. Você poderá adicionar tópicos, listas de verificação ou orientações assim que forem divulgados. ]
-            </p>
-          </div>
-        </div>
+      <div class="card">
+        <h2>Parte J — Fontes Consultadas e Créditos</h2>
+        <ul>
+          <li><strong>Material Didático e Roteiros de Aula:</strong> Disciplinas de Robótica, Física e Programação — 3º Trimestre (2026).</li>
+          <li><strong>Simulações de Circuitos:</strong> Autodesk Tinkercad (capturas de tela produzidas pelo grupo).</li>
+          <li><strong>Apoio Estrutural e Código Base:</strong> Estrutura inicial da página HTML/CSS/JS e adaptação do Cofre Digital geradas com apoio de Inteligência Artificial (Gemini) e revisadas pelos estudantes.</li>
+        </ul>
       </div>
     </section>
+  </main>
 
-    <!-- ABA 10: COFRE DIGITAL (NOVA ABA ADICIONADA) -->
-    <section id="tab-cofre-digital" class="tab-content space-y-6">
-      
-      <!-- Cabeçalho da Aba -->
-      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Segurança & Acessibilidade</span>
-          <h2 class="text-2xl font-bold">🔐 Cofre Digital Seguro</h2>
-        </div>
+  <footer>
+    <p>Projeto Integrador • Ciência, Tecnologia, IA e Acessibilidade • 2026</p>
+  </footer>
+
+  <!-- Conecta o arquivo JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
