@@ -396,54 +396,77 @@
       <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-6">
         <div class="flex items-center gap-3">
           <span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Projeto de Robótica</span>
-          <h2 class="text-2xl font-bold">Cofre Eletrônico com Senha e Sinalização Acessível</h2>
+          <h2 class="text-2xl font-bold">Cofre Eletrônico (Simulador Interativo)</h2>
         </div>
 
-        <p class="text-slate-300 text-sm leading-relaxed">
-          O projeto do Cofre Eletrônico utiliza microcontrolador, teclado/botões, servo motor e sinais visuais e sonoros para garantir segurança e acessibilidade no controle de abertura e fechamento.
-        </p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Simulador do Cofre -->
+          <div class="bg-slate-950 p-6 rounded-xl border border-slate-700 space-y-4">
+            <!-- Visor, LEDs e Status da Trava -->
+            <div class="flex items-center justify-between bg-slate-900 p-3 rounded-lg border border-slate-800">
+              <div class="flex items-center gap-3">
+                <div class="text-center">
+                  <div id="cofre-led-red" class="w-4 h-4 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444] mx-auto"></div>
+                  <span class="text-[9px] text-slate-400">Trancado</span>
+                </div>
+                <div class="text-center">
+                  <div id="cofre-led-green" class="w-4 h-4 rounded-full bg-slate-700 mx-auto"></div>
+                  <span class="text-[9px] text-slate-400">Aberto</span>
+                </div>
+              </div>
+              <div id="cofre-lock-status" class="text-xs font-bold text-red-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-lock"></i> COFRE TRANCADO
+              </div>
+            </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700 space-y-1">
-            <h3 class="font-bold text-cyan-400 text-sm flex items-center gap-1.5">
-              <i class="fa-solid fa-lock"></i> Funcionamento
-            </h3>
-            <p class="text-xs text-slate-300">
-              Ao digitar a senha correta, o sistema aciona a trava eletrônica (servo motor) e libera a abertura da porta do cofre.
-            </p>
-          </div>
-          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700 space-y-1">
-            <h3 class="font-bold text-emerald-400 text-sm flex items-center gap-1.5">
-              <i class="fa-solid fa-universal-access"></i> Acessibilidade
-            </h3>
-            <p class="text-xs text-slate-300">
-              Retorno duplo: LEDs coloridos (verde/vermelho) e display para pessoas surdas, combinados com bipes sonoros distintos para pessoas com baixa visão.
-            </p>
-          </div>
-          <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700 space-y-1">
-            <h3 class="font-bold text-amber-400 text-sm flex items-center gap-1.5">
-              <i class="fa-solid fa-shield-halved"></i> Segurança
-            </h3>
-            <p class="text-xs text-slate-300">
-              Bloqueio automático após tentativas incorretas e alerta visual/sonoro indicando acesso negado.
-            </p>
-          </div>
-        </div>
+            <!-- Display da Senha -->
+            <div class="bg-emerald-950/70 border-2 border-emerald-900 p-3 rounded-lg font-mono text-center">
+              <div id="cofre-display" class="text-lg tracking-widest text-emerald-300 font-bold">DIGITE A SENHA</div>
+              <div id="cofre-subdisplay" class="text-[11px] text-emerald-400/80 mt-0.5">Senha padrão: 1234</div>
+            </div>
 
-        <!-- ESPAÇO PARA FOTO DO PROJETO (COFRE) -->
-        <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-700 space-y-3">
-          <h3 class="font-bold text-amber-400 text-sm flex items-center gap-2">
-            <i class="fa-solid fa-camera"></i> Foto do Projeto: Cofre Eletrônico
-          </h3>
-          <div class="flex flex-col sm:flex-row gap-2">
-            <input type="text" id="link-cofre" placeholder="Cole o link da foto do cofre aqui (ou envie um arquivo ao lado)..." oninput="updatePhotoUrl('cofre')" class="flex-grow bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-slate-200">
-            <input type="file" id="file-cofre" accept="image/*" class="hidden" onchange="handleProjectFileUpload(event, 'cofre')">
-            <button type="button" onclick="document.getElementById('file-cofre').click()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs px-3 py-1.5 rounded font-medium transition">
-              <i class="fa-solid fa-upload"></i> Escolher Foto
-            </button>
+            <!-- Teclado Numérico -->
+            <div class="grid grid-cols-3 gap-2 max-w-xs mx-auto">
+              <button type="button" onclick="pressCofreKey('1')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">1</button>
+              <button type="button" onclick="pressCofreKey('2')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">2</button>
+              <button type="button" onclick="pressCofreKey('3')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">3</button>
+              <button type="button" onclick="pressCofreKey('4')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">4</button>
+              <button type="button" onclick="pressCofreKey('5')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">5</button>
+              <button type="button" onclick="pressCofreKey('6')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">6</button>
+              <button type="button" onclick="pressCofreKey('7')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">7</button>
+              <button type="button" onclick="pressCofreKey('8')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">8</button>
+              <button type="button" onclick="pressCofreKey('9')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">9</button>
+              <button type="button" onclick="clearCofreInput()" class="p-3 bg-red-900/50 hover:bg-red-800/60 text-red-300 rounded-lg font-bold text-xs border border-red-700">LIMPAR</button>
+              <button type="button" onclick="pressCofreKey('0')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-mono font-bold text-sm border border-slate-700">0</button>
+              <button type="button" onclick="checkCofrePassword()" class="p-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold text-xs">ABRIR</button>
+            </div>
+
+            <div class="flex justify-center gap-2 pt-1">
+              <button type="button" onclick="lockCofre()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs rounded border border-slate-600 text-slate-300">
+                <i class="fa-solid fa-lock"></i> Trancar Novamente
+              </button>
+              <button type="button" onclick="changeCofrePassword()" class="px-3 py-1.5 bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 text-xs rounded border border-amber-500/40">
+                <i class="fa-solid fa-key"></i> Alterar Senha
+              </button>
+            </div>
           </div>
-          <div class="w-full max-w-md h-52 bg-slate-950 rounded-lg border border-slate-800 overflow-hidden flex items-center justify-center">
-            <img id="img-cofre" src="https://images.unsplash.com/photo-1558002038-1055907df827?w=600&auto=format&fit=crop" alt="Foto do Projeto Cofre Eletrônico" class="w-full h-full object-cover">
+
+          <!-- Explicação Técnica e Acessibilidade -->
+          <div class="space-y-4 text-sm text-slate-300">
+            <p><strong>Como Funciona:</strong> O microcontrolador lê as teclas digitadas, compara com a senha armazenada na memória e aciona o servo motor para destravar o trinco.</p>
+            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700 space-y-2 text-xs">
+              <h3 class="font-bold text-emerald-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-universal-access"></i> Recursos de Acessibilidade:
+              </h3>
+              <ul class="list-disc pl-5 space-y-1">
+                <li><strong>Sinal Visual (Surdos):</strong> LED vermelho indica bloqueio e LED verde confirma abertura, junto com mensagens no display.</li>
+                <li><strong>Sinal Sonoro (Baixa Visão):</strong> Cada tecla emite um bipe de confirmação; senha correta emite som agudo duplo e senha errada emite alerta grave.</li>
+              </ul>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-xs">
+              <li><strong>Vantagem:</strong> Feedback duplo (luz + som) e troca rápida de senha sem chaves físicas.</li>
+              <li><strong>Limitação:</strong> Depende de alimentação elétrica contínua para manter a trava ativa.</li>
+            </ul>
           </div>
         </div>
       </div>

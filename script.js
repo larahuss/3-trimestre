@@ -361,6 +361,98 @@ function updateLcdDisplay() {
   if (in2 && out2) out2.innerText = (in2.value + '                ').substring(0, 16);
 }
 
+// SIMULADOR DO COFRE ELETRÔNICO
+let cofrePassword = '1234';
+let cofreEntered = '';
+let cofreLocked = true;
+
+function playCofreTone(freq, duration) {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return;
+  const ctx = new AudioContextClass();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(0.1, ctx.currentTime);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime + duration);
+}
+
+function pressCofreKey(digit) {
+  if (cofreEntered.length >= 6) return;
+  cofreEntered += digit;
+  playCofreTone(520, 0.08);
+  const display = document.getElementById('cofre-display');
+  if (display) display.innerText = '*'.repeat(cofreEntered.length);
+}
+
+function clearCofreInput() {
+  cofreEntered = '';
+  playCofreTone(320, 0.1);
+  const display = document.getElementById('cofre-display');
+  if (display) display.innerText = cofreLocked ? 'DIGITE A SENHA' : 'COFRE ABERTO';
+}
+
+function checkCofrePassword() {
+  const display = document.getElementById('cofre-display');
+  const sub = document.getElementById('cofre-subdisplay');
+  const status = document.getElementById('cofre-lock-status');
+  const ledRed = document.getElementById('cofre-led-red');
+  const ledGreen = document.getElementById('cofre-led-green');
+
+  if (cofreEntered === cofrePassword) {
+    cofreLocked = false;
+    cofreEntered = '';
+    playCofreTone(880, 0.25);
+    if (display) display.innerText = 'ACESSO LIBERADO!';
+    if (sub) sub.innerText = 'Trava acionada com sucesso';
+    if (status) {
+      status.innerHTML = '<i class="fa-solid fa-lock-open"></i> COFRE ABERTO';
+      status.className = 'text-xs font-bold text-emerald-400 flex items-center gap-1.5';
+    }
+    if (ledRed) ledRed.className = 'w-4 h-4 rounded-full bg-slate-700 mx-auto';
+    if (ledGreen) ledGreen.className = 'w-4 h-4 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] mx-auto';
+  } else {
+    cofreEntered = '';
+    playCofreTone(180, 0.4);
+    if (display) display.innerText = 'SENHA INCORRETA!';
+    if (sub) sub.innerText = 'Tente novamente';
+  }
+}
+
+function lockCofre() {
+  cofreLocked = true;
+  cofreEntered = '';
+  playCofreTone(400, 0.15);
+  const display = document.getElementById('cofre-display');
+  const sub = document.getElementById('cofre-subdisplay');
+  const status = document.getElementById('cofre-lock-status');
+  const ledRed = document.getElementById('cofre-led-red');
+  const ledGreen = document.getElementById('cofre-led-green');
+
+  if (display) display.innerText = 'DIGITE A SENHA';
+  if (sub) sub.innerText = `Senha atual: ${cofrePassword}`;
+  if (status) {
+    status.innerHTML = '<i class="fa-solid fa-lock"></i> COFRE TRANCADO';
+    status.className = 'text-xs font-bold text-red-400 flex items-center gap-1.5';
+  }
+  if (ledRed) ledRed.className = 'w-4 h-4 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444] mx-auto';
+  if (ledGreen) ledGreen.className = 'w-4 h-4 rounded-full bg-slate-700 mx-auto';
+}
+
+function changeCofrePassword() {
+  const nova = prompt('Digite uma nova senha numérica (4 a 6 dígitos):', cofrePassword);
+  if (!nova || !/^\d{4,6}$/.test(nova)) {
+    alert('Use apenas de 4 a 6 números.');
+    return;
+  }
+  cofrePassword = nova;
+  lockCofre();
+}
+
 // AUDITORIA DE IA
 function renderAiLogs() {
   const tbody = document.getElementById('ai-logs-body');
