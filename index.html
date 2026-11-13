@@ -1,32 +1,3 @@
-Siiim\! 💙 E pode ficar tranquila: quando clicar em cada aba, ela vai abrir normalmente, sem sair do site e sem atualizar a página.
-
-Vamos deixar o projeto preparado para receber todas as pesquisas. Cada assunto terá seu próprio espaço para colocar textos, imagens, tabelas, gráficos, referências e conclusões.
-
-O site continuará com o visual azul e cinza que você escolheu.
-
-## Como ficará a organização
-
-| Aba | Conteúdo que terá espaço |
-| --- | --- |
-| 🔐 Cofre Digital | Cofre funcional e orientações de segurança |
-| 🔊 Ciência do Som | Pesquisa sobre som, frequência e intensidade |
-| 📊 Medições | Tabela para os valores em decibéis e análise |
-| 💡 Matriz de LEDs | Pesquisa, funcionamento e foto do projeto |
-| 📡 Código Morse | Pesquisa, exemplos e foto do circuito |
-| 🖥️ Display | Pesquisa, exemplos e foto do display |
-| ⚖️ Comparação | Tabela comparativa das tecnologias |
-| 🤖 Inteligência Artificial | Prompts, respostas e verificações |
-| ♿ Acessibilidade | Situações reais e propostas de melhoria |
-| 📚 Conclusão | Conclusão, fontes e créditos |
-
-## 1. Menu superior
-
-Use este menu no seu `index.html`. Ele terá todas as abas:
-
-HTMLQuebrar linhasCopiar códigoVer prévia
-
-```html
-
 <nav class="navegacao">
   <button class="nav-btn active" onclick="trocarAba('cofre', this)">Cofre Digital</button>
   <button class="nav-btn" onclick="trocarAba('som', this)">Ciência do Som</button>
@@ -39,16 +10,6 @@ HTMLQuebrar linhasCopiar códigoVer prévia
   <button class="nav-btn" onclick="trocarAba('acessibilidade', this)">Acessibilidade</button>
   <button class="nav-btn" onclick="trocarAba('conclusao', this)">Conclusão e Fontes</button>
 </nav>
-```
-
-## 2. Espaços de pesquisa de cada aba
-
-Coloque este conteúdo dentro do `<main>` do HTML. Mantenha o conteúdo atual do cofre dentro da primeira seção.
-
-HTML✓ Desativar quebra automática de linhaCopiar códigoVer prévia
-
-```html
-
 <main>
 
   <!-- ABA 1: COFRE DIGITAL -->
