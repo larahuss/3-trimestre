@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projeto Integrador — Acessibilidade e Qualidade de Vida</title>
-  <!-- Conecta o arquivo CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -34,7 +33,9 @@
   </nav>
 
   <main>
-    <!-- ABA 1: ROBÓTICA -->
+    <!-- ==========================================
+         ABA 1: ROBÓTICA
+         ========================================== -->
     <section id="robotica" class="secao active">
       <div class="card">
         <h2>Parte A — Apresentação do Tema</h2>
@@ -44,40 +45,91 @@
         <p><strong>Acessibilidade:</strong> É garantir que qualquer pessoa, independentemente de suas limitações físicas, sensoriais ou cognitivas, consiga usar espaços, serviços e informações com autonomia e segurança.</p>
         <p><strong>Comunicação e Qualidade de Vida:</strong> Comunicar-se é uma necessidade básica. Quando um ambiente não oferece meios alternativos para transmitir avisos ou pedidos de ajuda, cria-se uma barreira de exclusão. A tecnologia reduz essas barreiras ao traduzir informações em luzes, sons ou textos claros.</p>
         <div class="placeholder-grupo">
-          <strong>[Preencher pelo grupo]:</strong> Descrevam aqui a situação concreta escolhida pelo grupo (ex: uma pessoa com deficiência auditiva em uma estação de trem ou um paciente sem fala em um hospital) e os nomes dos integrantes do grupo.
+          <strong>[Preencher pelo grupo]:</strong> Descrevam aqui a situação concreta escolhida pelo grupo (ex: uma pessoa com deficiência auditiva em uma estação de trem ou um paciente sem fala em um hospital) e os nomes dos integrantes.
         </div>
       </div>
 
+      <!-- MATRIZ DE LEDS + SIMULADOR -->
       <div class="card">
         <h2>Parte B — Matriz de LEDs</h2>
         <p><strong>O que é e como funciona:</strong> Uma matriz de LEDs é uma grade organizada em linhas e colunas de pequenos diodos emissores de luz. Ao acender pontos específicos de forma coordenada, o microcontrolador forma ícones, setas, letras ou expressões faciais.</p>
-        <p><strong>Aplicação na acessibilidade:</strong> Pode exibir símbolos universais como setas de direção, rostos indicando emoções (alegria, dor, tristeza) ou alertas visuais de perigo para pessoas surdas ou em locais muito barulhentos.</p>
-        <p><strong>Vantagens e limitações:</strong> Possui alto brilho e leitura rápida sem depender de idiomas complexos. Porém, tem baixa resolução para textos longos, perde visibilidade sob luz solar direta e exige que o usuário conheça o significado do símbolo.</p>
+        <p><strong>Vantagens e limitações:</strong> Possui alto brilho e leitura rápida sem depender de idiomas complexos. Porém, tem baixa resolução para textos longos, perde visibilidade sob luz solar direta e exige que o usuário compreenda o significado do símbolo.</p>
+
+        <!-- Simulador Interativo -->
+        <div class="simulador-box">
+          <h3>⚡ Simulador Interativo: Matriz de LEDs 8x8</h3>
+          <p>Clique nos botões abaixo para testar como a matriz comunica símbolos visuais (você também pode clicar nos LEDs para desenhar):</p>
+          <div class="matriz-container">
+            <div id="matrizGrid" class="matriz-grid"></div>
+            <div class="controles-simulador">
+              <button class="btn-sim" onclick="desenharPadrao('feliz')">😊 Alegria</button>
+              <button class="btn-sim" onclick="desenharPadrao('alerta')">⚠️ Alerta / Ajuda</button>
+              <button class="btn-sim" onclick="desenharPadrao('seta')">➡️ Direção / Saída</button>
+              <button class="btn-sim btn-limpar-sim" onclick="desenharPadrao('limpar')">🧹 Apagar</button>
+              <p id="legendaMatriz" class="legenda-sim">Símbolo atual: Alegria / Bem-estar</p>
+            </div>
+          </div>
+        </div>
+
         <div class="placeholder-grupo">
-          <strong>[Inserir Print do Tinkercad]:</strong> Coloquem aqui a captura de tela do circuito com Matriz de LEDs e expliquem qual símbolo ele está comunicando.
+          <strong>[Inserir Print do Tinkercad]:</strong> Coloquem aqui a captura de tela do circuito da Matriz de LEDs feito pelo grupo.
         </div>
       </div>
 
+      <!-- CÓDIGO MORSE + SIMULADOR -->
       <div class="card">
         <h2>Parte C — Código Morse</h2>
-        <p><strong>O que é e como funciona:</strong> É um sistema de comunicação que representa letras e números por meio da combinação de sinais curtos (pontos <code>.</code>) e longos (traços <code>-</code>). Em circuitos robóticos, um botão permite que o usuário envie os pulsos, enquanto um LED e um <em>buzzer</em> emitem sinais luminosos e sonoros simultaneamente.</p>
-        <p><strong>Exemplo prático:</strong> O pedido internacional de socorro <strong>SOS</strong> é representado por <code>... --- ...</code> (três sinais curtos, três longos e três curtos).</p>
-        <p><strong>Vantagens e limitações:</strong> Permite comunicação mesmo com recursos mínimos (apenas um botão para pessoas com mobilidade muito reduzida). Contudo, exige que quem recebe saiba decodificar a mensagem ou tenha um sistema que a traduza automaticamente.</p>
+        <p><strong>O que é e como funciona:</strong> É um sistema que representa letras e números por meio da combinação de sinais curtos (pontos <code>.</code>) e longos (traços <code>-</code>). Em circuitos robóticos, um botão permite que o usuário envie os pulsos, enquanto um LED e um <em>buzzer</em> emitem sinais luminosos e sonoros simultaneamente.</p>
+        <p><strong>Vantagens e limitações:</strong> Permite comunicação com recursos mínimos (apenas um botão para pessoas com mobilidade muito reduzida). Contudo, exige que quem recebe saiba decodificar a mensagem ou tenha um tradutor automático.</p>
+
+        <!-- Simulador Interativo -->
+        <div class="simulador-box">
+          <h3>📡 Simulador Interativo: Transmissor Morse (LED + Buzzer)</h3>
+          <p>Digite uma mensagem curta (ex: <strong>SOS</strong> ou <strong>AJUDA</strong>) e clique em transmitir para ver o LED piscar e ouvir o sinal sonoro:</p>
+          <div class="morse-controles">
+            <input type="text" id="textoMorse" value="SOS" maxlength="12" placeholder="Digite aqui (ex: SOS)">
+            <button class="btn-sim" onclick="transmitirMorse()">▶️ Transmitir Sinal</button>
+          </div>
+          <div class="morse-visual">
+            <div id="ledMorse" class="led-virtual"></div>
+            <div>
+              <strong>Código gerado:</strong> <span id="codigoMorseGerado" class="codigo-destaque">... --- ...</span><br>
+              <small id="statusMorse">Pronto para transmitir.</small>
+            </div>
+          </div>
+        </div>
+
         <div class="placeholder-grupo">
-          <strong>[Inserir Print do Tinkercad]:</strong> Coloquem aqui a imagem do circuito com botão, LED e buzzer e expliquem como o sinal é acionado.
+          <strong>[Inserir Print do Tinkercad]:</strong> Coloquem aqui a imagem do circuito com botão, LED e buzzer.
         </div>
       </div>
 
+      <!-- DISPLAY + SIMULADOR -->
       <div class="card">
         <h2>Parte D — Display (LCD / OLED)</h2>
         <p><strong>O que é e como funciona:</strong> É uma tela eletrônica capaz de exibir caracteres alfanuméricos, números e mensagens curtas de forma detalhada.</p>
-        <p><strong>Exemplo de mensagem acessível:</strong> <code>"ATENCAO: ALARME DE INCENDIO - DIRIJA-SE A SAIDA"</code> ou <code>"SENHA 042 - GUICHE 03"</code>.</p>
-        <p><strong>Vantagens e limitações:</strong> Transmite informações precisas e completas. Porém, sozinho não garante acessibilidade total: não atende pessoas cegas (sem leitor de tela ou áudio), pessoas não alfabetizadas ou falantes de outros idiomas, além de depender do tamanho da fonte e do contraste.</p>
+        <p><strong>Vantagens e limitações:</strong> Transmite informações precisas e completas. Porém, sozinho não garante acessibilidade total: não atende pessoas cegas (sem áudio), pessoas não alfabetizadas ou falantes de outros idiomas, além de depender do tamanho da tela e do contraste.</p>
+
+        <!-- Simulador Interativo -->
+        <div class="simulador-box">
+          <h3>📟 Simulador Interativo: Display LCD 16x2</h3>
+          <p>Teste como uma mensagem de orientação ou alerta aparece em um display eletrônico:</p>
+          <div class="morse-controles">
+            <input type="text" id="linha1Input" value="ATENCAO: ALERTA" maxlength="16" oninput="atualizarDisplay()" placeholder="Linha 1 (máx 16 letras)">
+            <input type="text" id="linha2Input" value="DIRIJA-SE A SAIDA" maxlength="16" oninput="atualizarDisplay()" placeholder="Linha 2 (máx 16 letras)">
+          </div>
+          <div class="lcd-tela">
+            <div id="lcdLinha1">ATENCAO: ALERTA</div>
+            <div id="lcdLinha2">DIRIJA-SE A SAIDA</div>
+          </div>
+        </div>
+
         <div class="placeholder-grupo">
-          <strong>[Inserir Print do Tinkercad]:</strong> Coloquem aqui a captura de tela do display exibindo a mensagem criada pelo grupo.
+          <strong>[Inserir Print do Tinkercad]:</strong> Coloquem aqui a captura de tela do display criado pelo grupo.
         </div>
       </div>
 
+      <!-- TABELA COMPARATIVA -->
       <div class="card">
         <h2>Parte E — Comparação dos Três Recursos</h2>
         <div class="tabela-responsiva">
@@ -118,6 +170,7 @@
         </div>
       </div>
 
+      <!-- ANÁLISE, MELHORIA E CONCLUSÃO -->
       <div class="card">
         <h2>Partes F, H e I — Análise Crítica, Proposta de Melhoria e Conclusão</h2>
         <p><strong>Relação com a Qualidade de Vida (Parte F):</strong> Em um ambiente hospitalar ou escolar movimentado, a combinação desses recursos evita o isolamento. Enquanto o display orienta com detalhes, a matriz de LEDs chama a atenção rapidamente e o Morse permite que alguém acione um alerta com um único toque.</p>
@@ -126,7 +179,9 @@
       </div>
     </section>
 
-    <!-- ABA 2: FÍSICA E TECNOCIÊNCIA -->
+    <!-- ==========================================
+         ABA 2: FÍSICA E TECNOCIÊNCIA
+         ========================================== -->
     <section id="fisica" class="secao">
       <div class="card">
         <h2>Ciência do Som: Audição, Acessibilidade e Qualidade de Vida</h2>
@@ -139,8 +194,9 @@
       </div>
 
       <div class="card">
-        <h2>Investigação na Escola — Medições com Decibelímetro</h2>
-        <p><em>Nota metodológica: Aplicativos de celular fornecem estimativas comparativas que variam conforme o microfone do aparelho e não substituem decibelímetros profissionais calibrados.</em></p>
+        <h2>Investigação na Escola — Medições e Gráfico Interativo</h2>
+        <p><em>Altere os valores em decibéis (dB) na tabela abaixo com os dados reais coletados pelo grupo para atualizar o gráfico automaticamente:</em></p>
+        
         <div class="tabela-responsiva">
           <table>
             <thead>
@@ -155,37 +211,45 @@
             <tbody>
               <tr>
                 <td>Biblioteca</td>
-                <td>[Preencher]</td>
-                <td>[Ex: 42 dB]</td>
+                <td><input type="text" class="input-tabela" placeholder="Ex: 10/11 - 09h"></td>
+                <td><input type="number" class="input-db" id="db0" value="42" min="20" max="120" oninput="atualizarGraficoSom()"></td>
                 <td>Estudantes lendo em silêncio</td>
                 <td>Ambiente acusticamente confortável</td>
               </tr>
               <tr>
                 <td>Sala de Aula</td>
-                <td>[Preencher]</td>
-                <td>[Ex: 65 dB]</td>
-                <td>Explicação da professora / conversas</td>
-                <td>Varia conforme atividade em grupo</td>
+                <td><input type="text" class="input-tabela" placeholder="Ex: 10/11 - 10h"></td>
+                <td><input type="number" class="input-db" id="db1" value="65" min="20" max="120" oninput="atualizarGraficoSom()"></td>
+                <td>Explicação / conversas</td>
+                <td>Varia conforme atividade</td>
               </tr>
               <tr>
                 <td>Corredor</td>
-                <td>[Preencher]</td>
-                <td>[Ex: 74 dB]</td>
+                <td><input type="text" class="input-tabela" placeholder="Ex: 10/11 - 10h20"></td>
+                <td><input type="number" class="input-db" id="db2" value="76" min="20" max="120" oninput="atualizarGraficoSom()"></td>
                 <td>Troca de aulas</td>
-                <td>Eco devido às paredes lisas</td>
+                <td>Reverberação nas paredes</td>
               </tr>
               <tr>
                 <td>Pátio / Refeitório</td>
-                <td>[Preencher]</td>
-                <td>[Ex: 86 dB]</td>
+                <td><input type="text" class="input-tabela" placeholder="Ex: 10/11 - 10h30"></td>
+                <td><input type="number" class="input-db" id="db3" value="86" min="20" max="120" oninput="atualizarGraficoSom()"></td>
                 <td>Intervalo / Recreio</td>
-                <td>Pico de ruído; difícil conversar</td>
+                <td>Pico de ruído; desconforto</td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <!-- Gráfico Visual de Barras -->
+        <div class="simulador-box">
+          <h3>📊 Comparativo Visual dos Níveis Sonoros (dB)</h3>
+          <div id="graficoSom" class="grafico-container"></div>
+          <p><small>🟢 Até 60 dB: Confortável | 🟡 61 a 79 dB: Moderado/Atenção | 🔴 80 dB ou mais: Ruído intenso / Sobrecarga</small></p>
+        </div>
+
         <div class="placeholder-grupo">
-          <strong>[Análise do Grupo]:</strong> Respondam aqui qual local teve maior e menor valor em dB e expliquem como a movimentação e a arquitetura influenciaram os resultados.
+          <strong>[Análise do Grupo]:</strong> Respondam aqui qual local teve maior e menor valor em dB, por que os valores mudaram conforme o horário e quais são as limitações do aplicativo de celular.
         </div>
       </div>
 
@@ -199,7 +263,9 @@
       </div>
     </section>
 
-    <!-- ABA 3: COFRE DIGITAL SEGURO -->
+    <!-- ==========================================
+         ABA 3: COFRE DIGITAL SEGURO
+         ========================================== -->
     <section id="cofre" class="secao">
       <div class="card">
         <h2>🔐 Cofre Digital Seguro e Acessível</h2>
@@ -218,7 +284,7 @@
           <label for="senhaMestra">1. Digite sua Senha Mestra (a chave do cofre):</label>
           <div class="senha-wrapper">
             <input type="password" id="senhaMestra" placeholder="Ex: CasaAzul2026!">
-            <button type="button" class="btn-acao btn-cinza" onclick="alternarSenha()">👁️ Mostrar</button>
+            <button type="button" class="btn-acao btn-cinza" id="btnOlho" onclick="alternarSenha()">👁️ Mostrar</button>
           </div>
         </div>
 
@@ -237,7 +303,9 @@
       </div>
     </section>
 
-    <!-- ABA 4: USO RESPONSÁVEL DE IA & FONTES -->
+    <!-- ==========================================
+         ABA 4: USO RESPONSÁVEL DE IA & FONTES
+         ========================================== -->
     <section id="ia-fontes" class="secao">
       <div class="card">
         <h2>Parte G — Registro Obrigatório do Uso de Inteligência Artificial</h2>
@@ -255,7 +323,7 @@
             <tbody>
               <tr>
                 <td>"Como criar um site acessível reunindo os roteiros de Robótica, Física e o Cofre Digital?"</td>
-                <td>Gerou a estrutura HTML/CSS/JS com botões de alto contraste, ajuste de fonte e abas temáticas.</td>
+                <td>Gerou a estrutura HTML/CSS/JS com botões de alto contraste, ajuste de fonte e simuladores interativos.</td>
                 <td>Testamos o arquivo no navegador e conferimos se todos os tópicos dos roteiros estavam presentes.</td>
                 <td>Mantivemos o layout acessível e adaptamos os textos e dados das medições para a realidade da nossa escola.</td>
               </tr>
@@ -275,7 +343,7 @@
         <ul>
           <li><strong>Material Didático e Roteiros de Aula:</strong> Disciplinas de Robótica, Física e Programação — 3º Trimestre (2026).</li>
           <li><strong>Simulações de Circuitos:</strong> Autodesk Tinkercad (capturas de tela produzidas pelo grupo).</li>
-          <li><strong>Apoio Estrutural e Código Base:</strong> Estrutura inicial da página HTML/CSS/JS e adaptação do Cofre Digital geradas com apoio de Inteligência Artificial (Gemini) e revisadas pelos estudantes.</li>
+          <li><strong>Apoio Estrutural e Código Base:</strong> Estrutura inicial da página HTML/CSS/JS, simuladores visuais e adaptação do Cofre Digital gerados com apoio de Inteligência Artificial (Gemini) e revisados pelos estudantes.</li>
         </ul>
       </div>
     </section>
@@ -285,7 +353,6 @@
     <p>Projeto Integrador • Ciência, Tecnologia, IA e Acessibilidade • 2026</p>
   </footer>
 
-  <!-- Conecta o arquivo JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
