@@ -1,10 +1,10 @@
-// =========================================================================
+/ =========================================================================
 // EDITE AQUI AS MEDIÇÕES DAS ONDAS SONORAS DA ESCOLA PARA FICAREM SALVAS NO CÓDIGO
 // Basta alterar os valores de local, data, db e contexto ou copiar uma linha!
 // =========================================================================
 const DEFAULT_MEASUREMENTS = [
-  { id: 1, local: 'corredor perto da sala de aula', data: '10/11 - 10:30', db: 96,3, contexto: 'os alunos estavam comversando' },
-  { id: 2, local: 'mesa de ping pong', data: '10/11 - 11:15', db: 94,4 contexto: 'algumas pessoas estavem la' },
+  { id: 1, local: 'corredor perto da sala de aula', data: '10/11 - 10:30', db: 96, contexto: 'os alunos estavam comversando' },
+  { id: 2, local: 'mesa de ping pong', data: '10/11 - 11:15', db: 94, contexto: 'algumas pessoas estavem la' },
   { id: 3, local: 'Corredor', data: '10/11 - 12:00', db: 78, contexto: 'Troca de aula / intervalo' },
   { id: 4, local: 'Refeitório', data: '10/11 - 12:30', db: 88, contexto: 'Horário do almoço lotado' },
   { id: 5, local: 'Pátio', data: '10/11 - 13:15', db: 72, contexto: 'Alunos reunidos em grupos' }
