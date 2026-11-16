@@ -1,8 +1,8 @@
 // =========================================================================
-// EDITE AQUI AS MEDIÇÕES DAS ONDAS SONORAS DA ESCOLA PARA FICAREM SALVAS NO CÓDIGO
-// Basta alterar os valores de local, data, db e contexto ou copiar uma linha!
+// EDITE AQUI AS MEDIÇÕES DAS ONDAS SONORAS DA ESCOLA
+// Basta alterar os valores dentro das aspas ou o número de db e salvar!
 // =========================================================================
-const DEFAULT_MEASUREMENTS = [
+let schoolMeasurements = [
   { id: 1, local: 'Biblioteca', data: '10/11 - 10:30', db: 42, contexto: 'Estudo silencioso' },
   { id: 2, local: 'Sala de Aula', data: '10/11 - 11:15', db: 65, contexto: 'Explicação do professor' },
   { id: 3, local: 'Corredor', data: '10/11 - 12:00', db: 78, contexto: 'Troca de aula / intervalo' },
@@ -10,13 +10,6 @@ const DEFAULT_MEASUREMENTS = [
   { id: 5, local: 'Pátio', data: '10/11 - 13:15', db: 72, contexto: 'Alunos reunidos em grupos' }
 ];
 // =========================================================================
-
-// Carrega as medições salvas no navegador ou usa as definidas acima no código
-let schoolMeasurements = JSON.parse(localStorage.getItem('schoolMeasurements_v2')) || [...DEFAULT_MEASUREMENTS];
-
-function saveMeasurementsStorage() {
-  localStorage.setItem('schoolMeasurements_v2', JSON.stringify(schoolMeasurements));
-}
 
 let aiLogs = [
   { prompt: 'O que é uma matriz de LEDs e como funciona?', resposta: 'A IA explicou o conceito de acionamento por linhas e colunas.', verificacao: 'Conferido no livro didático de robótica.', alteracao: 'Reescrito com palavras próprias e adicionado exemplo real.', id: 1 },
@@ -184,16 +177,17 @@ function renderSchoolMeasurements() {
   let minLoc = '--';
 
   schoolMeasurements.forEach((item) => {
-    sumDb += item.db;
-    if (item.db > maxDb) { maxDb = item.db; maxLoc = item.local; }
-    if (item.db < minDb) { minDb = item.db; minLoc = item.local; }
+    const dbVal = Number(item.db) || 0;
+    sumDb += dbVal;
+    if (dbVal > maxDb) { maxDb = dbVal; maxLoc = item.local; }
+    if (dbVal < minDb) { minDb = dbVal; minLoc = item.local; }
 
     const tr = document.createElement('tr');
     tr.className = 'hover:bg-slate-700/20 transition';
     tr.innerHTML = `
       <td class="p-3 font-semibold text-slate-200">${item.local}</td>
       <td class="p-3 text-slate-400">${item.data}</td>
-      <td class="p-3 font-bold ${item.db >= 80 ? 'text-red-400' : 'text-cyan-400'}">${item.db} dB</td>
+      <td class="p-3 font-bold ${dbVal >= 80 ? 'text-red-400' : 'text-cyan-400'}">${dbVal} dB</td>
       <td class="p-3 text-slate-300">${item.contexto}</td>
       <td class="p-3">
         <button type="button" onclick="deleteSchoolMeasurementRow(${item.id})" class="text-red-400 hover:text-red-300 text-xs" title="Excluir medição">
@@ -227,19 +221,15 @@ function addSchoolMeasurementRow() {
     db: db,
     contexto: contexto || 'Registro livre'
   });
-  saveMeasurementsStorage();
   renderSchoolMeasurements();
 }
 
 function deleteSchoolMeasurementRow(id) {
   schoolMeasurements = schoolMeasurements.filter(item => item.id !== id);
-  saveMeasurementsStorage();
   renderSchoolMeasurements();
 }
 
 function resetSchoolMeasurements() {
-  localStorage.removeItem('schoolMeasurements_v2');
-  schoolMeasurements = [...DEFAULT_MEASUREMENTS];
   renderSchoolMeasurements();
 }
 
