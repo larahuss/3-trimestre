@@ -5,9 +5,9 @@
 let schoolMeasurements = [
   { id: 1, local: 'corredor', data: '10/11 - 10:30', db: 96, contexto: 'estava tendo aula' },
   { id: 2, local: 'mesa de ping pong', data: '10/11 - 11:15', db: 107, contexto: 'estava vazia' },
-  { id: 3, local: 'Corredor', data: '10/11 - 12:00', db: 78, contexto: 'Troca de aula / intervalo' },
+  { id: 3, local: 'patio ', data: '10/11 - 12:00', db: 98, contexto: 'estava vazio' },
   { id: 4, local: 'Refeitório', data: '10/11 - 12:30', db: 94, contexto: 'estava vazio' },
-  { id: 5, local: 'Pátio', data: '10/11 - 13:15', db: 72, contexto: 'Alunos reunidos em grupos' }
+  { id: 5, local: 'xerox', data: '10/11 - 13:15', db: 105, contexto: 'estava em silencio/ sala vazia' }
 ];
 // =========================================================================
 
