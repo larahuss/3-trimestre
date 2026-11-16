@@ -6,7 +6,7 @@ let schoolMeasurements = [
   { id: 1, local: 'Biblioteca', data: '10/11 - 10:30', db: 66, contexto: 'Estudooo silencioso' },
   { id: 2, local: 'Sala de Aula', data: '10/11 - 11:15', db: 65, contexto: 'Explicação do professor' },
   { id: 3, local: 'Corredor', data: '10/11 - 12:00', db: 78, contexto: 'Troca de aula / intervalo' },
-  { id: 4, local: 'Refeitório', data: '10/11 - 12:30', db: 88, contexto: 'Horário do almoço lotado' },
+  { id: 4, local: 'Refeitório', data: '10/11 - 12:30', db: 94, contexto: 'estava vazio' },
   { id: 5, local: 'Pátio', data: '10/11 - 13:15', db: 72, contexto: 'Alunos reunidos em grupos' }
 ];
 // =========================================================================
