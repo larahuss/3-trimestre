@@ -3,7 +3,7 @@
 // Basta alterar os valores de local, data, db e contexto ou copiar uma linha!
 // =========================================================================
 const DEFAULT_MEASUREMENTS = [
-  { id: 1, local: 'Biblioteca', data: '10/11 - 10:30', db: 42, contexto: 'Estudo silencioso' },
+  { id: 1, local: 'corredor perto da sala de aula', data: '10/11 - 10:30', db: 96,3, contexto: 'Estudo silencioso' },
   { id: 2, local: 'Sala de Aula', data: '10/11 - 11:15', db: 65, contexto: 'Explicação do professor' },
   { id: 3, local: 'Corredor', data: '10/11 - 12:00', db: 78, contexto: 'Troca de aula / intervalo' },
   { id: 4, local: 'Refeitório', data: '10/11 - 12:30', db: 88, contexto: 'Horário do almoço lotado' },
