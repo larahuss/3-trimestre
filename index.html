@@ -59,7 +59,7 @@
           <h1 class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
             Projeto Integrador: Tecnologia & Acessibilidade
           </h1>
-          <p class="text-xs text-slate-400">Física, Tecnociência e Robótica — 2ºC & 3º Trimestre</p>
+          <p class="text-xs text-slate-400">lara-nubia-maria fernanda</p>
         </div>
       </div>
 
@@ -515,7 +515,97 @@
         </div>
       </div>
     </section>
+<!-- DIVISOR ENTRE O COFRE E A ANÁLISE NUTRICIONAL -->
+      <hr class="border-slate-700/80 my-8">
 
+      <!-- PROJETO: ANÁLISE NUTRICIONAL (DENTRO DA ABA COFRE) -->
+      <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+        <div class="flex items-center gap-3">
+          <span class="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Saúde & Bem-Estar</span>
+          <h2 class="text-2xl font-bold">Modelo Computacional de Análise Nutricional</h2>
+        </div>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Selecione os alimentos e informe a quantidade de porções consumidas no dia para calcular os macronutrientes e receber alertas éticos de saúde.
+        </p>
+
+        <!-- Formulário de Adição -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-900/60 p-4 rounded-xl border border-slate-700 items-end">
+          <div>
+            <label for="nutri-alimento" class="text-xs font-medium text-slate-300 block mb-1">Alimento:</label>
+            <select id="nutri-alimento" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-emerald-400 outline-none">
+              <option value="">-- Selecione um alimento --</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="nutri-porcoes" class="text-xs font-medium text-slate-300 block mb-1">Quantidade de Porções:</label>
+            <input type="number" id="nutri-porcoes" min="0.1" step="0.1" placeholder="Ex: 1.5" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:border-emerald-400 outline-none">
+          </div>
+
+          <div class="flex gap-2">
+            <button type="button" onclick="adicionarAlimentoNutri()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2.5 px-4 rounded-lg transition flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-plus"></i> Adicionar
+            </button>
+            <button type="button" onclick="limparRefeicaoNutri()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-medium py-2.5 px-3 rounded-lg transition" title="Limpar Tudo">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <p id="nutri-erro" class="text-xs text-red-400 font-semibold hidden"></p>
+      </div>
+
+      <!-- Lista de Alimentos Registrados -->
+      <div id="nutri-card-lista" class="hidden bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-3">
+        <h3 class="text-lg font-semibold text-emerald-400 flex items-center gap-2">
+          <i class="fa-solid fa-utensils"></i> Alimentos Registrados no Dia
+        </h3>
+        <ul id="nutri-lista-itens" class="divide-y divide-slate-700/60 text-sm text-slate-300"></ul>
+      </div>
+
+      <!-- Relatório Nutricional Automatizado -->
+      <div id="nutri-card-relatorio" class="hidden bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-5">
+        <h3 class="text-lg font-semibold text-cyan-400 flex items-center gap-2">
+          <i class="fa-solid fa-chart-pie"></i> Relatório Nutricional Automatizado
+        </h3>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+            <span class="text-xs text-slate-400 block">Calorias Totais</span>
+            <strong id="nutri-res-calorias" class="text-lg text-cyan-400 font-bold">0.0 kcal</strong>
+          </div>
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+            <span class="text-xs text-slate-400 block">Carboidratos</span>
+            <strong id="nutri-res-carboidratos" class="text-lg text-indigo-400 font-bold">0.0 g</strong>
+          </div>
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+            <span class="text-xs text-slate-400 block">Proteínas</span>
+            <strong id="nutri-res-proteinas" class="text-lg text-emerald-400 font-bold">0.0 g</strong>
+          </div>
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+            <span class="text-xs text-slate-400 block">Gorduras Totais</span>
+            <strong id="nutri-res-gorduras" class="text-lg text-amber-400 font-bold">0.0 g</strong>
+          </div>
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+            <span class="text-xs text-slate-400 block">Fibras</span>
+            <strong id="nutri-res-fibras" class="text-lg text-teal-400 font-bold">0.0 g</strong>
+          </div>
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700 text-center">
+            <span class="text-xs text-slate-400 block">Sódio</span>
+            <strong id="nutri-res-sodio" class="text-lg text-rose-400 font-bold">0.0 mg</strong>
+          </div>
+        </div>
+
+        <!-- Avisos Éticos de Saúde -->
+        <div class="p-4 bg-slate-900/90 rounded-xl border-l-4 border-amber-500 space-y-2">
+          <h4 class="font-bold text-amber-400 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-heart-pulse"></i> Aviso Ético de Saúde
+          </h4>
+          <div id="nutri-alertas" class="space-y-1.5 text-xs"></div>
+          <p class="text-[11px] text-slate-400 italic pt-1">
+            * Nota: Este programa é uma ferramenta de apoio educacional e não substitui a orientação de um nutricionista ou médico.
+          </p>
+        </div>
+      </div>
     <!-- ABA 8: ESTUDO DE CASO -->
     <section id="tab-robotica-caso" class="tab-content space-y-6">
       <div class="bg-slate-800/80 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">

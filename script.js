@@ -465,7 +465,136 @@ function renderAiLogs() {
     `;
     tbody.appendChild(tr);
   });
+}// ==========================================
+// MÓDULO: ANÁLISE NUTRICIONAL
+// ==========================================
+const BANCO_ALIMENTOS = {
+  arroz_integral: { nome: "Arroz Integral Cozido (100g)", calorias: 124, carboidratos: 25.8, proteinas: 2.6, gorduras: 1.0, sodio_mg: 1, fibras_g: 2.7 },
+  feijao_preto: { nome: "Feijão Preto Cozido (100g)", calorias: 77, carboidratos: 14.0, proteinas: 4.5, gorduras: 0.5, sodio_mg: 2, fibras_g: 8.4 },
+  frango_grelhado: { nome: "Peito de Frango Grelhado (100g)", calorias: 165, carboidratos: 0.0, proteinas: 31.0, gorduras: 3.6, sodio_mg: 74, fibras_g: 0.0 },
+  banana: { nome: "Banana Prata (1 unidade - 100g)", calorias: 98, carboidratos: 26.0, proteinas: 1.3, gorduras: 0.1, sodio_mg: 1, fibras_g: 2.0 },
+  aveia: { nome: "Aveia em Flocos (30g)", calorias: 117, carboidratos: 20.0, proteinas: 4.3, gorduras: 2.2, sodio_mg: 0, fibras_g: 2.9 }
+};
+
+let refeicaoNutri = {};
+
+function inicializarNutricao() {
+  const select = document.getElementById("nutri-alimento");
+  if (!select || select.options.length > 1) return;
+
+  for (const [id, item] of Object.entries(BANCO_ALIMENTOS)) {
+    const opt = document.createElement("option");
+    opt.value = id;
+    opt.textContent = item.nome;
+    select.appendChild(opt);
+  }
 }
+
+function adicionarAlimentoNutri() {
+  const select = document.getElementById("nutri-alimento");
+  const input = document.getElementById("nutri-porcoes");
+  const erro = document.getElementById("nutri-erro");
+
+  erro.classList.add("hidden");
+  const id = select.value;
+  const porcoes = parseFloat(input.value);
+
+  if (!id) {
+    erro.textContent = "[ALERTA] Selecione um alimento do cardápio.";
+    erro.classList.remove("hidden");
+    return;
+  }
+
+  if (isNaN(porcoes) || porcoes <= 0) {
+    erro.textContent = "[ALERTA] A quantidade de porções deve ser maior que zero.";
+    erro.classList.remove("hidden");
+    return;
+  }
+
+  refeicaoNutri[id] = (refeicaoNutri[id] || 0) + porcoes;
+  select.value = "";
+  input.value = "";
+  atualizarRelatorioNutri();
+}
+
+function removerAlimentoNutri(id) {
+  delete refeicaoNutri[id];
+  atualizarRelatorioNutri();
+}
+
+function limparRefeicaoNutri() {
+  refeicaoNutri = {};
+  document.getElementById("nutri-erro").classList.add("hidden");
+  atualizarRelatorioNutri();
+}
+
+function atualizarRelatorioNutri() {
+  const ids = Object.keys(refeicaoNutri);
+  const cardLista = document.getElementById("nutri-card-lista");
+  const cardRelatorio = document.getElementById("nutri-card-relatorio");
+  const listaUl = document.getElementById("nutri-lista-itens");
+  const containerAlertas = document.getElementById("nutri-alertas");
+
+  if (ids.length === 0) {
+    cardLista.classList.add("hidden");
+    cardRelatorio.classList.add("hidden");
+    return;
+  }
+
+  cardLista.classList.remove("hidden");
+  cardRelatorio.classList.remove("hidden");
+
+  listaUl.innerHTML = "";
+  const totais = { calorias: 0, carboidratos: 0, proteinas: 0, gorduras: 0, sodio_mg: 0, fibras_g: 0 };
+
+  ids.forEach(id => {
+    const dados = BANCO_ALIMENTOS[id];
+    const porcoes = refeicaoNutri[id];
+
+    totais.calorias += dados.calorias * porcoes;
+    totais.carboidratos += dados.carboidratos * porcoes;
+    totais.proteinas += dados.proteinas * porcoes;
+    totais.gorduras += dados.gorduras * porcoes;
+    totais.sodio_mg += dados.sodio_mg * porcoes;
+    totais.fibras_g += dados.fibras_g * porcoes;
+
+    const li = document.createElement("li");
+    li.className = "py-2.5 flex justify-between items-center";
+    li.innerHTML = `
+      <span><strong class="text-emerald-400">${porcoes}x</strong> ${dados.nome}</span>
+      <button type="button" onclick="removerAlimentoNutri('${id}')" class="px-2.5 py-1 bg-red-900/40 hover:bg-red-800/60 text-red-300 border border-red-700/50 rounded text-xs transition">
+        Remover
+      </button>
+    `;
+    listaUl.appendChild(li);
+  });
+
+  document.getElementById("nutri-res-calorias").textContent = `${totais.calorias.toFixed(1)} kcal`;
+  document.getElementById("nutri-res-carboidratos").textContent = `${totais.carboidratos.toFixed(1)} g`;
+  document.getElementById("nutri-res-proteinas").textContent = `${totais.proteinas.toFixed(1)} g`;
+  document.getElementById("nutri-res-gorduras").textContent = `${totais.gorduras.toFixed(1)} g`;
+  document.getElementById("nutri-res-fibras").textContent = `${totais.fibras_g.toFixed(1)} g`;
+  document.getElementById("nutri-res-sodio").textContent = `${totais.sodio_mg.toFixed(1)} mg`;
+
+  containerAlertas.innerHTML = "";
+  let temAlerta = false;
+
+  if (totais.sodio_mg > 2000) {
+    containerAlertas.innerHTML += `<p class="text-red-400 font-medium">⚠️ ALERTA: O consumo de sódio calculado excede 2000mg. Pessoas com hipertensão devem atentar-se a este limite.</p>`;
+    temAlerta = true;
+  }
+
+  if (totais.fibras_g < 25) {
+    containerAlertas.innerHTML += `<p class="text-amber-300 font-medium">💡 DICA: O consumo de fibras está abaixo do recomendado para a saúde digestiva (mínimo de 25g/dia).</p>`;
+    temAlerta = true;
+  }
+
+  if (!temAlerta) {
+    containerAlertas.innerHTML += `<p class="text-emerald-400 font-medium">✅ Os níveis de sódio e fibras estão dentro das recomendações analisadas.</p>`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", inicializarNutricao);
 
 function addAiAuditRow() {
   const promptTxt = prompt('Digite o prompt enviado para a IA:');
